@@ -20,7 +20,7 @@ class TourDepartureService implements TourDepartureServiceInterface
      */
     public function getListTourDeparture($params)
     {
-        $query = $this->tourDeparture->with(['tour'])->select('tour_id')->groupBy('tour_id')->orderByDesc('created_at')->paginate();
+        $query = $this->tourDeparture->with(['tour'])->select('tour_id')->groupBy('tour_id')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourDepartureResponse();
@@ -39,7 +39,7 @@ class TourDepartureService implements TourDepartureServiceInterface
      */
     public function getAllTourDeparture($params)
     {
-        $query = $this->tourDeparture->orderByDesc('created_at')->get();
+        $query = $this->tourDeparture->get();
         return $query->map(function ($item) {
             return $item->getTourDepartureResponse();
         });
