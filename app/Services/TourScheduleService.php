@@ -20,7 +20,7 @@ class TourScheduleService implements TourScheduleServiceInterface
      */
     public function getListTourSchedule($params)
     {
-        $query = $this->tourSchedule->with(['tour'])->select('tour_id')->groupBy('tour_id')->orderByDesc('created_at')->paginate();
+        $query = $this->tourSchedule->with(['tour'])->select('tour_id')->groupBy('tour_id')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourScheduleResponse();
@@ -39,7 +39,7 @@ class TourScheduleService implements TourScheduleServiceInterface
      */
     public function getAllTourSchedule($params)
     {
-        $query = $this->tourSchedule->orderByAsc('created_at')->get();
+        $query = $this->tourSchedule->get();
         return $query->map(function ($item) {
             return $item->getTourScheduleResponse();
         });

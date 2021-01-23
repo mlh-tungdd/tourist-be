@@ -20,7 +20,7 @@ class TourPriceService implements TourPriceServiceInterface
      */
     public function getListTourPrice($params)
     {
-        $query = $this->tourPrice->with(['tour'])->select('tour_id')->groupBy('tour_id')->orderByDesc('created_at')->paginate();
+        $query = $this->tourPrice->with(['tour'])->select('tour_id')->groupBy('tour_id')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourPriceResponse();
@@ -39,7 +39,7 @@ class TourPriceService implements TourPriceServiceInterface
      */
     public function getAllTourPrice($params)
     {
-        $query = $this->tourPrice->orderByDesc('created_at')->get();
+        $query = $this->tourPrice->get();
         return $query->map(function ($item) {
             return $item->getTourPriceResponse();
         });

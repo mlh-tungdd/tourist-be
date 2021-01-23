@@ -20,7 +20,7 @@ class TourImageService implements TourImageServiceInterface
      */
     public function getListTourImage($params)
     {
-        $query = $this->tourImage->with(['tour'])->select('tour_id')->groupBy('tour_id')->orderByDesc('created_at')->paginate();
+        $query = $this->tourImage->with(['tour'])->select('tour_id')->groupBy('tour_id')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourImageResponse();
@@ -39,7 +39,7 @@ class TourImageService implements TourImageServiceInterface
      */
     public function getAllTourImage($params)
     {
-        $query = $this->tourImage->orderByDesc('created_at')->get();
+        $query = $this->tourImage->get();
         return $query->map(function ($item) {
             return $item->getTourImageResponse();
         });
