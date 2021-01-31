@@ -20,7 +20,7 @@ class TourService implements TourServiceInterface
      */
     public function getListTour($params)
     {
-        $query = $this->tour->with(['time', 'departure', 'destination', 'vehicle'])->orderByDesc('created_at')->paginate();
+        $query = $this->tour->with(['time', 'departure', 'destination'])->orderByDesc('created_at')->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourResponse();
@@ -63,7 +63,7 @@ class TourService implements TourServiceInterface
             'thumbnail' => $params['thumbnail'],
             'space' => $params['space'],
             'time_id' => $params['time_id'],
-            'vehicle_id' => $params['vehicle_id'],
+            'vehicle' => $params['vehicle'],
             'departure_id' => $params['departure_id'],
             'destination_id' => $params['destination_id'],
         ]);

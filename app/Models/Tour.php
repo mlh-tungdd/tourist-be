@@ -29,7 +29,7 @@ class Tour extends Model
         'thumbnail',
         'space',
         'time_id',
-        'vehicle_id',
+        'vehicle',
         'departure_id',
         'destination_id',
     ];
@@ -41,15 +41,6 @@ class Tour extends Model
     public function time()
     {
         return $this->belongsTo(Time::class);
-    }
-
-    /**
-     * vehicle relationship
-     *
-     */
-    public function vehicle()
-    {
-        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 
     /**
@@ -87,11 +78,10 @@ class Tour extends Model
             'thumbnail' => $this->thumbnail,
             'space' => $this->space,
             'time_id' => $this->time_id,
-            'vehicle_id' => $this->vehicle_id,
+            'vehicle' => $this->vehicle,
             'departure_id' => $this->departure_id,
             'destination_id' => $this->destination_id,
             'time_name' => $this->time->title ?? null,
-            'vehicle_name' => $this->vehicle->title ?? null,
             'departure_name' => $this->departure->city ?? null,
             'destination_name' => $this->destination->city ?? null,
         ];

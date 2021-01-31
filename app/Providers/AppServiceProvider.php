@@ -19,11 +19,6 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
-            \App\Services\VehicleServiceInterface::class,
-            \App\Services\VehicleService::class
-        );
-
-        $this->app->singleton(
             \App\Services\TimeServiceInterface::class,
             \App\Services\TimeService::class
         );

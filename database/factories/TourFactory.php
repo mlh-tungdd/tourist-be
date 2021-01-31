@@ -35,7 +35,7 @@ class TourFactory extends Factory
             'thumbnail' => '',
             'space' => $this->faker->numberBetween(0, 100),
             'time_id' => $this->faker->randomElement($time),
-            'vehicle_id' => $this->faker->randomElement($vehicle),
+            'vehicle' => $this->faker->randomElement($vehicle),
             'departure_id' => $this->faker->randomElement($departure),
             'destination_id' => $this->faker->randomElement($destination),
         ];

@@ -68,7 +68,7 @@ class TourImageController extends ApiController
                     $fileName = $fileName . '_' . $key . time() . '.' . $extension;
 
                     $file->move(public_path('images/' . $this->folder), $fileName);
-                    $scenics[] = $fileName;
+                    $scenics[] = env('APP_URL') . "/images/" . $this->folder . '/' . $fileName;
                 }
             }
             if (isset($request->travelers)) {
@@ -79,7 +79,7 @@ class TourImageController extends ApiController
                     $fileName = $fileName . '_' . $key . time() . '.' . $extension;
 
                     $file->move(public_path('images/' . $this->folder), $fileName);
-                    $travelers[] = $fileName;
+                    $travelers[] = env('APP_URL') . "/images/" . $this->folder . '/' . $fileName;
                 }
             }
 
@@ -91,7 +91,7 @@ class TourImageController extends ApiController
                     $fileName = $fileName . '_' . $key . time() . '.' . $extension;
 
                     $file->move(public_path('images/' . $this->folder), $fileName);
-                    $foods[] = $fileName;
+                    $foods[] = env('APP_URL') . "/images/" . $this->folder . '/' . $fileName;
                 }
             }
 

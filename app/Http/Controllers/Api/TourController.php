@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Tour;
 use App\Http\Requests\TourRequest;
 use App\Services\TourServiceInterface;
+use Illuminate\Support\Facades\URL;
 
 class TourController extends ApiController
 {
@@ -76,10 +77,10 @@ class TourController extends ApiController
                 'term' => $request->term,
                 'space' => $request->space,
                 'time_id' => $request->time_id,
-                'vehicle_id' => $request->vehicle_id,
+                'vehicle' => $request->vehicle,
                 'departure_id' => $request->departure_id,
                 'destination_id' => $request->destination_id,
-                'thumbnail' => $fileName,
+                'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
             ]);
             return $this->response->withCreated();
         } catch (Exception $ex) {
@@ -113,13 +114,13 @@ class TourController extends ApiController
                 $filenameByRequest = $request->file('thumbnail')->getClientOriginalName();
                 $fileName = pathinfo($filenameByRequest, PATHINFO_FILENAME);
                 $extension = $request->file('thumbnail')->getClientOriginalExtension();
-                $fileName = $fileName . '_' . time() . '.' . $extension;
+                $fileName = env('APP_URL') . $fileName . '_' . time() . '.' . $extension;
 
                 $request->file('thumbnail')->move(public_path('images/' . $this->folder), $fileName);
 
                 $this->tourService->updateTour([
                     'id' => $id,
-                    'thumbnail' => $fileName,
+                    'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
                 ]);
             }
 

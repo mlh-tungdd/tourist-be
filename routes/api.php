@@ -24,14 +24,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/user/delete/{id}', 'UserController@delete');
         Route::get('/user/info', 'UserController@showProfile');
 
-        // vehicle
-        Route::get('/vehicles', 'VehicleController@index');
-        Route::get('/vehicles/all_vehicle', 'VehicleController@all');
-        Route::post('/vehicles', 'VehicleController@store');
-        Route::get('/vehicles/delete/{id}', 'VehicleController@destroy');
-        Route::get('/vehicles/{id}', 'VehicleController@show');
-        Route::post('/vehicles/{id}', 'VehicleController@update');
-
         // time
         Route::get('/times', 'TimeController@index');
         Route::get('/times/all_time', 'TimeController@all');
