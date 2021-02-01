@@ -89,11 +89,19 @@ Route::group(['namespace' => 'Api'], function () {
 
         // banner
         Route::get('/banners', 'BannerController@index');
-        Route::get('/banners/all_tour', 'BannerController@all');
+        Route::get('/banners/all_banner', 'BannerController@all');
         Route::post('/banners', 'BannerController@store');
         Route::get('/banners/delete/{id}', 'BannerController@destroy');
         Route::get('/banners/{id}', 'BannerController@show');
         Route::post('/banners/{id}', 'BannerController@update');
+
+        // partner
+        Route::get('/partners', 'PartnerController@index');
+        Route::get('/partners/all_partner', 'PartnerController@all');
+        Route::post('/partners', 'PartnerController@store');
+        Route::get('/partners/delete/{id}', 'PartnerController@destroy');
+        Route::get('/partners/{id}', 'PartnerController@show');
+        Route::post('/partners/{id}', 'PartnerController@update');
 
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');

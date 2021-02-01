@@ -62,6 +62,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\BannerServiceInterface::class,
             \App\Services\BannerService::class
         );
+
+        $this->app->singleton(
+            \App\Services\PartnerServiceInterface::class,
+            \App\Services\PartnerService::class
+        );
     }
 
     /**
