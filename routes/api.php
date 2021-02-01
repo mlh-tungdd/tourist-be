@@ -18,6 +18,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
+    Route::get('/tours/all_tour', 'TourController@all');
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
         Route::get('/user/list', 'UserController@getList');
@@ -42,7 +43,7 @@ Route::group(['namespace' => 'Api'], function () {
 
         // tour
         Route::get('/tours', 'TourController@index');
-        Route::get('/tours/all_tour', 'TourController@all');
+
         Route::post('/tours', 'TourController@store');
         Route::get('/tours/delete/{id}', 'TourController@destroy');
         Route::get('/tours/{id}', 'TourController@show');

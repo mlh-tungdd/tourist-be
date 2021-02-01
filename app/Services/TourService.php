@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Tour;
+use Illuminate\Database\Eloquent\Builder;
 
 class TourService implements TourServiceInterface
 {
@@ -40,6 +41,26 @@ class TourService implements TourServiceInterface
     public function getAllTour($params)
     {
         $query = $this->tour->orderByDesc('created_at');
+        $type = $params['type'] ?? null;
+        if ($type != null) {
+            switch ($type) {
+                case 'hot_sale':
+                    $query->whereHas('tourPrices', function (Builder $q) {
+                        $q->where('original_price', '!=', 0)
+                        ->whereColumn('price', '<', 'original_price');
+                    });
+                    return $query->get()->map(function ($item) {
+                        return $item->getTourResponse();
+                    });
+                    break;
+
+                default:
+                    return $query->get()->map(function ($item) {
+                        return $item->getTourResponse();
+                    });
+                    break;
+            }
+        }
         return $query->get()->map(function ($item) {
             return $item->getTourResponse();
         });
