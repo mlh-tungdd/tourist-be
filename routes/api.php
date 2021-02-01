@@ -80,6 +80,13 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/tour_images/{id}', 'TourImageController@show');
         Route::post('/tour_images/update', 'TourImageController@update');
 
+        // news
+        Route::get('/news', 'NewsController@index');
+        Route::post('/news', 'NewsController@store');
+        Route::get('/news/delete/{id}', 'NewsController@destroy');
+        Route::get('/news/{id}', 'NewsController@show');
+        Route::post('/news/{id}', 'NewsController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

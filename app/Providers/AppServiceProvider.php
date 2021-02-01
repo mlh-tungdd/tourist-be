@@ -52,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\TourImageServiceInterface::class,
             \App\Services\TourImageService::class
         );
+
+        $this->app->singleton(
+            \App\Services\NewsServiceInterface::class,
+            \App\Services\NewsService::class
+        );
     }
 
     /**
