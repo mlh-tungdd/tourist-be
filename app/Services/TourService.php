@@ -40,28 +40,67 @@ class TourService implements TourServiceInterface
      */
     public function getAllTour($params)
     {
-        $query = $this->tour->orderByDesc('created_at');
+        $query = null;
         $type = $params['type'] ?? null;
+        $locale = $params['locale'] ?? null;
+        $mostView = $params['views'] ?? null;
+        $now = now();
+        $lastDay = $now->addDay();
+
+        if ($mostView == null) {
+            $query = $this->tour->orderByDesc('created_at');
+        } else {
+            $query = $this->tour->orderByDesc('views')
+                ->where('views', '!=', 0);
+        }
+
         if ($type != null) {
             switch ($type) {
                 case 'hot_sale':
                     $query->whereHas('tourPrices', function (Builder $q) {
                         $q->where('original_price', '!=', 0)
-                        ->whereColumn('price', '<', 'original_price');
-                    });
-                    return $query->get()->map(function ($item) {
-                        return $item->getTourResponse();
+                            ->whereColumn('price', '<', 'original_price');
                     });
                     break;
-
-                default:
-                    return $query->get()->map(function ($item) {
-                        return $item->getTourResponse();
+                case 'last_hour':
+                    $query->whereHas('tourDepartures', function ($q) use ($lastDay) {
+                        $q->where('start_day', '<=', $lastDay);
                     });
+                    break;
+                default:
+                    //
                     break;
             }
         }
-        return $query->get()->map(function ($item) {
+
+        if ($locale != null) {
+            switch ($locale) {
+                case 'nation':
+                    $query->whereHas('destination', function ($q) {
+                        $q->where('type', 0);
+                    });
+                    break;
+                case 'foreign':
+                    $query->whereHas('destination', function ($q) {
+                        $q->where('type', 1);
+                    });
+                    break;
+                default:
+                    //
+                    break;
+            }
+        }
+
+        if ($type != null || $locale != null) {
+            $query->whereHas('tourDepartures', function ($q) use ($now) {
+                $q->where('start_day', '>', $now);
+            });
+            $query = $query->limit(8)->get();
+        } else {
+            $query = $query->get();
+        }
+
+        return $query->map(function ($item) {
             return $item->getTourResponse();
         });
     }

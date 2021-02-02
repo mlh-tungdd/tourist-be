@@ -20,7 +20,6 @@ class TourDeparture extends Model
      */
     protected $fillable = [
         'start_day',
-        'start_time',
         'tour_id',
     ];
 
@@ -54,7 +53,6 @@ class TourDeparture extends Model
         return [
             'id' => $this->id,
             'start_day' => $this->start_day,
-            'start_time' => $this->start_time,
         ];
     }
 }

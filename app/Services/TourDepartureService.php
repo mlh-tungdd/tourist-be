@@ -58,7 +58,6 @@ class TourDepartureService implements TourDepartureServiceInterface
         foreach ($departures as $value) {
             $this->tourDeparture->create([
                 'start_day' => $value['start_day'],
-                'start_time' => $value['start_time'],
                 'tour_id' => $tourId,
             ]);
         }
@@ -100,7 +99,6 @@ class TourDepartureService implements TourDepartureServiceInterface
         foreach ($departures as $value) {
             $this->tourDeparture->findOrFail($value['_id'])->update([
                 'start_day' => $value['start_day'],
-                'start_time' => $value['start_time'],
             ]);
         }
 

@@ -12,6 +12,7 @@ class LocationController extends ApiController
 {
     protected $locationService;
     protected $response;
+    protected $folder = 'locations';
 
     /**
      * construct function
@@ -56,7 +57,25 @@ class LocationController extends ApiController
     public function store(LocationRequest $request)
     {
         try {
-            $this->locationService->createLocation($request->all());
+            $fileName = null;
+            if ($request->hasFile('thumbnail')) {
+                $filenameByRequest = $request->file('thumbnail')->getClientOriginalName();
+                $fileName = pathinfo($filenameByRequest, PATHINFO_FILENAME);
+                $extension = $request->file('thumbnail')->getClientOriginalExtension();
+                $fileName = $fileName . '_' . time() . '.' . $extension;
+
+                $request->file('thumbnail')->move(public_path('images/' . $this->folder), $fileName);
+            }
+
+            $this->locationService->createLocation([
+                'regions' => $request->regions,
+                'city' => $request->city,
+                'description' => $request->description,
+                'content' => $request->content,
+                'type' => $request->type,
+                'is_departure' => $request->is_departure,
+                'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
+            ]);
             return $this->response->withCreated();
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
@@ -85,10 +104,26 @@ class LocationController extends ApiController
     public function update(LocationRequest $request, $id)
     {
         try {
+            if ($request->hasFile('thumbnail')) {
+                $filenameByRequest = $request->file('thumbnail')->getClientOriginalName();
+                $fileName = pathinfo($filenameByRequest, PATHINFO_FILENAME);
+                $extension = $request->file('thumbnail')->getClientOriginalExtension();
+                $fileName = $fileName . '_' . time() . '.' . $extension;
+
+                $request->file('thumbnail')->move(public_path('images/' . $this->folder), $fileName);
+
+                $this->locationService->updateLocation([
+                    'id' => $id,
+                    'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
+                ]);
+            }
+
             $this->locationService->updateLocation([
                 'id' => $id,
                 'regions' => $request->regions,
                 'city' => $request->city,
+                'description' => $request->description,
+                'content' => $request->content,
                 'type' => $request->type,
                 'is_departure' => $request->is_departure,
             ]);

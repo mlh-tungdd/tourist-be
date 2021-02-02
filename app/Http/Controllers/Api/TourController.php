@@ -114,7 +114,7 @@ class TourController extends ApiController
                 $filenameByRequest = $request->file('thumbnail')->getClientOriginalName();
                 $fileName = pathinfo($filenameByRequest, PATHINFO_FILENAME);
                 $extension = $request->file('thumbnail')->getClientOriginalExtension();
-                $fileName = env('APP_URL') . $fileName . '_' . time() . '.' . $extension;
+                $fileName = $fileName . '_' . time() . '.' . $extension;
 
                 $request->file('thumbnail')->move(public_path('images/' . $this->folder), $fileName);
 

@@ -17,6 +17,9 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->integer('regions');
             $table->string('city');
+            $table->text('description')->nullable();
+            $table->text('content')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->tinyInteger('type');
             $table->tinyInteger('is_departure');
             $table->timestamps();

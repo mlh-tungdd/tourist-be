@@ -21,6 +21,9 @@ class Location extends Model
     protected $fillable = [
         'regions',
         'city',
+        'description',
+        'content',
+        'thumbnail',
         'type',
         'is_departure'
     ];
@@ -35,6 +38,9 @@ class Location extends Model
             'id' => $this->id,
             'regions' => $this->regions,
             'city' => $this->city,
+            'description' => $this->description,
+            'content' => $this->content,
+            'thumbnail' => $this->thumbnail,
             'type' => $this->type,
             'is_departure' => $this->is_departure
         ];

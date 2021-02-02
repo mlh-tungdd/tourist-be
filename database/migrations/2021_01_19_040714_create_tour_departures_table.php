@@ -15,8 +15,7 @@ class CreateTourDeparturesTable extends Migration
     {
         Schema::create('tour_departures', function (Blueprint $table) {
             $table->id();
-            $table->date('start_day');
-            $table->dateTime('start_time');
+            $table->dateTime('start_day');
             $table->bigInteger('tour_id')->unsigned()->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

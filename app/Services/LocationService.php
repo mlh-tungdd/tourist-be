@@ -40,11 +40,14 @@ class LocationService implements LocationServiceInterface
     public function getAllLocation($params)
     {
         $query = $this->location->orderByDesc('created_at');
-        if (isset($params['type'])) {
-            return $query->where('type', '=', $params['type'])->get();
+        $type = $params['type'] ?? null;
+        $destination = $params['destination'] ?? null;
+
+        if ($type != null) {
+            $query->where('type', $type);
         }
-        if (isset($params['destination'])) {
-            return $query->where('is_departure', '=', $params['destination'])->get();
+        if ($destination != null) {
+            $query->where('is_departure', $destination);
         }
         return $query->get()->map(function ($item) {
             return $item->getLocationResponse();
@@ -62,6 +65,9 @@ class LocationService implements LocationServiceInterface
         $this->location->create([
             'regions' => $params['regions'],
             'city' => $params['city'],
+            'description' => $params['description'],
+            'content' => $params['content'],
+            'thumbnail' => $params['thumbnail'],
             'type' => $params['type'],
             'is_departure' => $params['is_departure'],
         ]);

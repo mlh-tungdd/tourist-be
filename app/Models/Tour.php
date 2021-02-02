@@ -32,6 +32,7 @@ class Tour extends Model
         'vehicle',
         'departure_id',
         'destination_id',
+        'views',
     ];
 
     /**
@@ -99,6 +100,7 @@ class Tour extends Model
             'vehicle' => $this->vehicle,
             'departure_id' => $this->departure_id,
             'destination_id' => $this->destination_id,
+            'views' => $this->views,
             'time_name' => $this->time->title ?? null,
             'departure_name' => $this->departure->city ?? null,
             'destination_name' => $this->destination->city ?? null,
