@@ -161,4 +161,17 @@ class TourService implements TourServiceInterface
     {
         $this->tour->findOrFail($params['id'])->update($params);
     }
+
+    public function getListTourByLocationId($params)
+    {
+        $id = $params['id'];
+        $now = now();
+        $query = $this->tour->where('destination_id', $id)->orderByDesc('created_at')
+            ->whereHas('tourDepartures', function ($q) use ($now) {
+                $q->where('start_day', '>', $now);
+            });
+        return $query->get()->map(function ($item) {
+            return $item->getTourResponse();
+        });
+    }
 }

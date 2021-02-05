@@ -22,7 +22,6 @@ class TourFactory extends Factory
     public function definition()
     {
         $time = \App\Models\Time::get()->pluck('id')->toArray();
-        $vehicle = \App\Models\Vehicle::get()->pluck('id')->toArray();
         $departure = \App\Models\Location::where('is_departure', 1)->get()->pluck('id')->toArray();
         $destination = \App\Models\Location::where('is_departure', 0)->get()->pluck('id')->toArray();
         return [
@@ -35,7 +34,7 @@ class TourFactory extends Factory
             'thumbnail' => '',
             'space' => $this->faker->numberBetween(0, 100),
             'time_id' => $this->faker->randomElement($time),
-            'vehicle' => $this->faker->randomElement($vehicle),
+            'vehicle' => $this->faker->text(100),
             'departure_id' => $this->faker->randomElement($departure),
             'destination_id' => $this->faker->randomElement($destination),
         ];

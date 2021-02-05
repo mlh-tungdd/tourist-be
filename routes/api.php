@@ -18,8 +18,12 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
+
     Route::get('/tours/all_tour', 'TourController@all');
+    Route::get('/tours/get_by_location_id/{id}', 'TourController@getListTourByLocationId');
     Route::get('/locations/all_location', 'LocationController@all');
+    Route::get('/locations/{id}', 'LocationController@show');
+
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
         Route::get('/user/list', 'UserController@getList');
@@ -38,7 +42,6 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/locations', 'LocationController@index');
         Route::post('/locations', 'LocationController@store');
         Route::get('/locations/delete/{id}', 'LocationController@destroy');
-        Route::get('/locations/{id}', 'LocationController@show');
         Route::post('/locations/{id}', 'LocationController@update');
 
         // tour

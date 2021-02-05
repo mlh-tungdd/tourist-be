@@ -159,4 +159,15 @@ class TourController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Get tour by location id
+     */
+    public function getListTourByLocationId($id)
+    {
+        $tours = $this->tourService->getListTourByLocationId([
+            'id' => $id
+        ]);
+        return $this->response->withData($tours);
+    }
 }

@@ -29,6 +29,14 @@ class Location extends Model
     ];
 
     /**
+     * tour relationship
+     */
+    public function tours()
+    {
+        return $this->hasMany(Tour::class, 'destination_id');
+    }
+
+    /**
      * response
      *
      */

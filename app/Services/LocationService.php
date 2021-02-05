@@ -92,7 +92,7 @@ class LocationService implements LocationServiceInterface
      */
     public function showLocation($id)
     {
-        return $this->location->findOrFail($id);
+        return $this->location->findOrFail($id)->getLocationResponse();
     }
 
     /**
