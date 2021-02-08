@@ -33,8 +33,8 @@ class PartnerController extends ApiController
      */
     public function index(Request $request)
     {
-        $partners = $this->partnerService->getListPartner($request->all());
-        return $this->response->withData($partners);
+        $list = $this->partnerService->getListPartner($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -44,8 +44,8 @@ class PartnerController extends ApiController
      */
     public function all(Request $request)
     {
-        $partners = $this->partnerService->getAllPartner($request->all());
-        return $this->response->withData($partners);
+        $list = $this->partnerService->getAllPartner($request->all());
+        return $this->response->withData($list);
     }
 
     /**

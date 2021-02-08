@@ -46,6 +46,7 @@ class NewsService implements NewsServiceInterface
             'content' => $params['content'],
             'thumbnail' => $params['thumbnail'],
             'author' => $params['author'],
+            'category_news_id' => $params['category_news_id'],
         ]);
     }
 

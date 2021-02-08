@@ -32,8 +32,8 @@ class TourPriceController extends ApiController
      */
     public function index(Request $request)
     {
-        $tourPrices = $this->tourPrice->getListTourPrice($request->all());
-        return $this->response->withData($tourPrices);
+        $list = $this->tourPrice->getListTourPrice($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -43,8 +43,8 @@ class TourPriceController extends ApiController
      */
     public function all(Request $request)
     {
-        $tourPrices = $this->tourPrice->getAllTourPrice($request->all());
-        return $this->response->withData($tourPrices);
+        $list = $this->tourPrice->getAllTourPrice($request->all());
+        return $this->response->withData($list);
     }
 
     /**

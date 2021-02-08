@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TimeSeeder::class,
             SettingSeeder::class,
+            LocationSeeder::class,
         ]);
         \App\Models\User::factory(10)->create();
-        \App\Models\Location::factory(10)->create();
         \App\Models\Tour::factory(10)->create();
         \App\Models\TourDeparture::factory(10)->create();
         \App\Models\TourPrice::factory(10)->create();
@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\AlbumImage::factory(10)->create();
         \App\Models\Banner::factory(10)->create();
         \App\Models\Partner::factory(10)->create();
+        \App\Models\CategoryNews::factory(10)->create();
+        \App\Models\News::factory(10)->create();
     }
 }

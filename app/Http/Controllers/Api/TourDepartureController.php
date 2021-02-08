@@ -32,8 +32,8 @@ class TourDepartureController extends ApiController
      */
     public function index(Request $request)
     {
-        $tourDepartures = $this->tourDeparture->getListTourDeparture($request->all());
-        return $this->response->withData($tourDepartures);
+        $list = $this->tourDeparture->getListTourDeparture($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -43,8 +43,8 @@ class TourDepartureController extends ApiController
      */
     public function all(Request $request)
     {
-        $tourDepartures = $this->tourDeparture->getAllTourDeparture($request->all());
-        return $this->response->withData($tourDepartures);
+        $list = $this->tourDeparture->getAllTourDeparture($request->all());
+        return $this->response->withData($list);
     }
 
     /**

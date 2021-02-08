@@ -34,8 +34,8 @@ class TourController extends ApiController
      */
     public function index(Request $request)
     {
-        $tours = $this->tourService->getListTour($request->all());
-        return $this->response->withData($tours);
+        $list = $this->tourService->getListTour($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -45,8 +45,8 @@ class TourController extends ApiController
      */
     public function all(Request $request)
     {
-        $tours = $this->tourService->getAllTour($request->all());
-        return $this->response->withData($tours);
+        $list = $this->tourService->getAllTour($request->all());
+        return $this->response->withData($list);
     }
 
     /**

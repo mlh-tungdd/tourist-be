@@ -34,8 +34,8 @@ class UserController extends ApiController
      */
     public function getList(Request $request)
     {
-        $users = $this->userService->getList($request->all());
-        return $this->response->withData($users);
+        $list = $this->userService->getList($request->all());
+        return $this->response->withData($list);
     }
 
     public function delete($id)

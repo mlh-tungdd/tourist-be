@@ -67,6 +67,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\PartnerServiceInterface::class,
             \App\Services\PartnerService::class
         );
+
+        $this->app->singleton(
+            \App\Services\CategoryNewsServiceInterface::class,
+            \App\Services\CategoryNewsService::class
+        );
     }
 
     /**

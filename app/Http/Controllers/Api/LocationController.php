@@ -33,8 +33,8 @@ class LocationController extends ApiController
      */
     public function index(Request $request)
     {
-        $locations = $this->locationService->getListLocation($request->all());
-        return $this->response->withData($locations);
+        $list = $this->locationService->getListLocation($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -44,8 +44,8 @@ class LocationController extends ApiController
      */
     public function all(Request $request)
     {
-        $locations = $this->locationService->getAllLocation($request->all());
-        return $this->response->withData($locations);
+        $list = $this->locationService->getAllLocation($request->all());
+        return $this->response->withData($list);
     }
 
     /**

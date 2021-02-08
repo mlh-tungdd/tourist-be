@@ -32,8 +32,8 @@ class TimeController extends ApiController
      */
     public function index(Request $request)
     {
-        $times = $this->timeService->getListTime($request->all());
-        return $this->response->withData($times);
+        $list = $this->timeService->getListTime($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -43,8 +43,8 @@ class TimeController extends ApiController
      */
     public function all(Request $request)
     {
-        $times = $this->timeService->getAllTime($request->all());
-        return $this->response->withData($times);
+        $list = $this->timeService->getAllTime($request->all());
+        return $this->response->withData($list);
     }
 
     /**

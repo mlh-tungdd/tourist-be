@@ -107,6 +107,14 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/partners/{id}', 'PartnerController@show');
         Route::post('/partners/{id}', 'PartnerController@update');
 
+        // category news
+        Route::get('/categories_news', 'CategoryNewsController@index');
+        Route::get('/categories_news/all_category_news', 'CategoryNewsController@all');
+        Route::post('/categories_news', 'CategoryNewsController@store');
+        Route::get('/categories_news/delete/{id}', 'CategoryNewsController@destroy');
+        Route::get('/categories_news/{id}', 'CategoryNewsController@show');
+        Route::post('/categories_news/{id}', 'CategoryNewsController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

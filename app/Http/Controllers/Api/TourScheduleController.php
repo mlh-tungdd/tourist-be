@@ -32,8 +32,8 @@ class TourScheduleController extends ApiController
      */
     public function index(Request $request)
     {
-        $tourSchedules = $this->tourSchedule->getListTourSchedule($request->all());
-        return $this->response->withData($tourSchedules);
+        $list = $this->tourSchedule->getListTourSchedule($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -43,8 +43,8 @@ class TourScheduleController extends ApiController
      */
     public function all(Request $request)
     {
-        $tourSchedules = $this->tourSchedule->getAllTourSchedule($request->all());
-        return $this->response->withData($tourSchedules);
+        $list = $this->tourSchedule->getAllTourSchedule($request->all());
+        return $this->response->withData($list);
     }
 
     /**

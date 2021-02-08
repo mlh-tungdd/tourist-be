@@ -33,8 +33,8 @@ class BannerController extends ApiController
      */
     public function index(Request $request)
     {
-        $banners = $this->bannerService->getListBanner($request->all());
-        return $this->response->withData($banners);
+        $list = $this->bannerService->getListBanner($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -44,8 +44,8 @@ class BannerController extends ApiController
      */
     public function all(Request $request)
     {
-        $banners = $this->bannerService->getAllBanner($request->all());
-        return $this->response->withData($banners);
+        $list = $this->bannerService->getAllBanner($request->all());
+        return $this->response->withData($list);
     }
 
     /**

@@ -33,8 +33,8 @@ class TourImageController extends ApiController
      */
     public function index(Request $request)
     {
-        $tourImages = $this->tourImage->getListTourImage($request->all());
-        return $this->response->withData($tourImages);
+        $list = $this->tourImage->getListTourImage($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -44,8 +44,8 @@ class TourImageController extends ApiController
      */
     public function all(Request $request)
     {
-        $tourImages = $this->tourImage->getAllTourImage($request->all());
-        return $this->response->withData($tourImages);
+        $list = $this->tourImage->getAllTourImage($request->all());
+        return $this->response->withData($list);
     }
 
     /**

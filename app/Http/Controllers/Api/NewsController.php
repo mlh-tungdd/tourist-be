@@ -33,8 +33,8 @@ class NewsController extends ApiController
      */
     public function index(Request $request)
     {
-        $news = $this->newsService->getListNews($request->all());
-        return $this->response->withData($news);
+        $list = $this->newsService->getListNews($request->all());
+        return $this->response->withData($list);
     }
 
     /**
@@ -61,6 +61,7 @@ class NewsController extends ApiController
                 'description' => $request->description,
                 'content' => $request->content,
                 'author' => $request->author,
+                'category_news_id' => $request->category_news_id,
                 'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
             ]);
             return $this->response->withCreated();
@@ -111,6 +112,7 @@ class NewsController extends ApiController
                 'description' => $request->description,
                 'content' => $request->content,
                 'author' => $request->author,
+                'category_news_id' => $request->category_news_id,
             ]);
             return $this->response->withMessage('Update successful');
         } catch (Exception $ex) {
