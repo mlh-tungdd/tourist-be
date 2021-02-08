@@ -16,12 +16,11 @@ class CreateTourPricesTable extends Migration
         Schema::create('tour_prices', function (Blueprint $table) {
             $table->id();
             $table->string('type_customer');
-            $table->integer('original_price');
+            $table->integer('original_price')->nullable();
             $table->integer('price');
             $table->bigInteger('tour_id')->unsigned()->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

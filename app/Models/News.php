@@ -23,8 +23,19 @@ class News extends Model
         'description',
         'content',
         'thumbnail',
-        'author'
+        'author',
+        'source',
+        'category_news_id'
     ];
+
+    /**
+     * category relationship
+     *
+     */
+    public function categoryNews()
+    {
+        return $this->belongsTo(CategoryNews::class, 'category_news_id');
+    }
 
     /**
      * response
@@ -39,6 +50,9 @@ class News extends Model
             'content' => $this->content,
             'thumbnail' => $this->thumbnail,
             'author' => $this->author,
+            'source' => $this->source,
+            'category_news_id' => $this->category_news_id,
+            'category_name' => $this->categoryNews->title ?? null
         ];
     }
 }

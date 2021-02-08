@@ -13,13 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(1)->create();
-        // \App\Models\Vehicle::factory(5)->create();
-        // \App\Models\Time::factory(5)->create();
-        // \App\Models\Location::factory(5)->create();
-        // \App\Models\Tour::factory(5)->create();
         $this->call([
             UserSeeder::class,
+            TimeSeeder::class,
+            SettingSeeder::class,
         ]);
+        \App\Models\User::factory(10)->create();
+        \App\Models\Location::factory(10)->create();
+        \App\Models\Tour::factory(10)->create();
+        \App\Models\TourDeparture::factory(10)->create();
+        \App\Models\TourPrice::factory(10)->create();
+        \App\Models\TourSchedule::factory(10)->create();
+        \App\Models\TourImage::factory(10)->create();
+        \App\Models\Album::factory(10)->create();
+        \App\Models\AlbumImage::factory(10)->create();
+        \App\Models\Banner::factory(10)->create();
+        \App\Models\Partner::factory(10)->create();
     }
 }

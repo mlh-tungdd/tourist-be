@@ -32,7 +32,6 @@ class CreateToursTable extends Migration
             $table->foreign('departure_id')->references('id')->on('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('destination_id')->references('id')->on('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Time;
+use App\Models\Partner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TimeFactory extends Factory
+class PartnerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Time::class;
+    protected $model = Partner::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,9 @@ class TimeFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->name
+            'title' => $this->faker->sentence(6, true),
+            'url' => $this->faker->url,
+            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
         ];
     }
 }

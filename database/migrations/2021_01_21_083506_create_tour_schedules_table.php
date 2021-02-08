@@ -15,13 +15,12 @@ class CreateTourSchedulesTable extends Migration
     {
         Schema::create('tour_schedules', function (Blueprint $table) {
             $table->id();
-            $table->integer('day_number');
-            $table->string('title');
-            $table->text('content');
+            $table->integer('day_number')->nullable();
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->bigInteger('tour_id')->unsigned()->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

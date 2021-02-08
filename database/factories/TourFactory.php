@@ -21,22 +21,23 @@ class TourFactory extends Factory
      */
     public function definition()
     {
-        $time = \App\Models\Time::get()->pluck('id')->toArray();
-        $departure = \App\Models\Location::where('is_departure', 1)->get()->pluck('id')->toArray();
-        $destination = \App\Models\Location::where('is_departure', 0)->get()->pluck('id')->toArray();
+        $times = \App\Models\Time::get()->pluck('id')->toArray();
+        $departures = \App\Models\Location::where('is_departure', 1)->get()->pluck('id')->toArray();
+        $destinations = \App\Models\Location::where('is_departure', 0)->get()->pluck('id')->toArray();
         return [
-            'roll_number' => $this->faker->unique()->name,
+            'roll_number' => $this->faker->unique()->tld,
             'title' => $this->faker->sentence(6, true),
             'description' => $this->faker->text(200),
             'content' => $this->faker->text(200),
             'schedule' => $this->faker->text(200),
             'term' => $this->faker->text(200),
-            'thumbnail' => '',
-            'space' => $this->faker->numberBetween(0, 100),
-            'time_id' => $this->faker->randomElement($time),
-            'vehicle' => $this->faker->text(100),
-            'departure_id' => $this->faker->randomElement($departure),
-            'destination_id' => $this->faker->randomElement($destination),
+            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'space' => $this->faker->numberBetween(0, 20),
+            'vehicle' => $this->faker->sentence(4, true),
+            'views' => $this->faker->numberBetween(0, 100),
+            'time_id' => $this->faker->randomElement($times),
+            'departure_id' => $this->faker->randomElement($departures),
+            'destination_id' => $this->faker->randomElement($destinations),
         ];
     }
 }

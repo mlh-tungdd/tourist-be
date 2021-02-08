@@ -22,10 +22,13 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'regions' => $this->faker->biasedNumberBetween($min = 1, $max = 7),
+            'regions' => $this->faker->numberBetween($min = 1, $max = 7),
             'city' => $this->faker->city,
-            'type' => $this->faker->biasedNumberBetween($min = 1, $max = 1),
-            'is_departure' => $this->faker->biasedNumberBetween($min = 0, $max = 1),
+            'description' => $this->faker->text(200),
+            'content' => $this->faker->text(200),
+            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'type' => $this->faker->numberBetween($min = 0, $max = 1),
+            'is_departure' => $this->faker->numberBetween($min = 0, $max = 1),
         ];
     }
 }

@@ -57,25 +57,24 @@ class TourImageService implements TourImageServiceInterface
         $scenics = $params['scenics'];
         $travelers = $params['travelers'];
         $foods = $params['foods'];
-        var_dump($scenics);
         foreach ($scenics as $value) {
             $this->tourImage->create([
                 'type' => 1,
-                'url' => $value,
+                'thumbnail' => $value,
                 'tour_id' => $tourId,
             ]);
         }
         foreach ($travelers as $value) {
             $this->tourImage->create([
                 'type' => 2,
-                'url' => $value,
+                'thumbnail' => $value,
                 'tour_id' => $tourId,
             ]);
         }
         foreach ($foods as $value) {
             $this->tourImage->create([
                 'type' => 3,
-                'url' => $value,
+                'thumbnail' => $value,
                 'tour_id' => $tourId,
             ]);
         }
@@ -117,7 +116,7 @@ class TourImageService implements TourImageServiceInterface
         foreach ($images as $value) {
             $this->tourImage->findOrFail($value['_id'])->update([
                 'type' => $value['type'],
-                'url' => $value['url'],
+                'thumbnail' => $value['thumbnail'],
             ]);
         }
 

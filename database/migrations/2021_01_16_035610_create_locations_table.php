@@ -23,7 +23,6 @@ class CreateLocationsTable extends Migration
             $table->tinyInteger('type');
             $table->tinyInteger('is_departure');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

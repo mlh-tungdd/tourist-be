@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourImagesTable extends Migration
+class CreateOrderDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTourImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tour_images', function (Blueprint $table) {
+        Schema::create('order_detail', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type')->default(0);
-            $table->string('thumbnail')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->bigInteger('order_id')->unsigned()->nullable();
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('tour_id')->unsigned()->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateTourImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tour_images');
+        Schema::dropIfExists('order_detail');
     }
 }

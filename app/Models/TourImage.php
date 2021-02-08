@@ -20,7 +20,7 @@ class TourImage extends Model
      */
     protected $fillable = [
         'type',
-        'url',
+        'thumbnail',
         'tour_id',
     ];
 
@@ -54,7 +54,7 @@ class TourImage extends Model
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'url' => $this->url,
+            'thumbnail' => $this->thumbnail,
         ];
     }
 }
