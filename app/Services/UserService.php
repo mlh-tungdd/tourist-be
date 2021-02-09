@@ -23,7 +23,7 @@ class UserService implements UserServiceInterface
      */
     public function getList($params)
     {
-        $query = $this->user->orderBy('id', 'desc');
+        $query = $this->user->where('id', '!=', JWTAuth::user()->id)->orderBy('id', 'desc');
         if (isset($params['username'])) {
             return $query->where('username', 'like', '%' . $params['username'] . '%')->paginate();
         }
