@@ -15,8 +15,6 @@ class CreateAlbumImagesTable extends Migration
     {
         Schema::create('album_images', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->bigInteger('album_id')->unsigned()->nullable();
             $table->foreign('album_id')->references('id')->on('albums')->onUpdate('cascade')->onDelete('cascade');

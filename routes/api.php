@@ -123,6 +123,14 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/albums/{id}', 'AlbumController@show');
         Route::post('/albums/{id}', 'AlbumController@update');
 
+        // album image
+        Route::get('/album_images', 'AlbumImageController@index');
+        Route::get('/album_images/by_album_id/{id}', 'AlbumImageController@getListByAlbumId');
+        Route::post('/album_images', 'AlbumImageController@store');
+        Route::get('/album_images/delete/{id}', 'AlbumImageController@destroy');
+        Route::get('/album_images/{id}', 'AlbumImageController@show');
+        Route::post('/album_images/update', 'AlbumImageController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

@@ -23,8 +23,6 @@ class AlbumImageFactory extends Factory
     {
         $albums = \App\Models\Album::get()->pluck('id')->toArray();
         return [
-            'title' => $this->faker->sentence(6, true),
-            'description' => $this->faker->text(50),
             'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
             'album_id' => $this->faker->randomElement($albums),
         ];

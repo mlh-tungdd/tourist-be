@@ -77,6 +77,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\AlbumServiceInterface::class,
             \App\Services\AlbumService::class
         );
+
+        $this->app->singleton(
+            \App\Services\AlbumImageServiceInterface::class,
+            \App\Services\AlbumImageService::class
+        );
     }
 
     /**
