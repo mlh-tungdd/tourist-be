@@ -115,6 +115,14 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/categories_news/{id}', 'CategoryNewsController@show');
         Route::post('/categories_news/{id}', 'CategoryNewsController@update');
 
+        // album
+        Route::get('/albums', 'AlbumController@index');
+        Route::get('/albums/all_album', 'AlbumController@all');
+        Route::post('/albums', 'AlbumController@store');
+        Route::get('/albums/delete/{id}', 'AlbumController@destroy');
+        Route::get('/albums/{id}', 'AlbumController@show');
+        Route::post('/albums/{id}', 'AlbumController@update');
+
         // user profile
         Route::get('/user/show_profile', 'UserController@showProfile');
         Route::post('/user/edit_profile', 'UserController@editProfile');

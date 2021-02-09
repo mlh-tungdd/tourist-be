@@ -72,6 +72,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\CategoryNewsServiceInterface::class,
             \App\Services\CategoryNewsService::class
         );
+
+        $this->app->singleton(
+            \App\Services\AlbumServiceInterface::class,
+            \App\Services\AlbumService::class
+        );
     }
 
     /**
