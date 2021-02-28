@@ -24,7 +24,7 @@ class TourImageFactory extends Factory
         $tours = \App\Models\Tour::get()->pluck('id')->toArray();
         return [
             'type' => $this->faker->numberBetween(1, 3),
-            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'thumbnail' => 'https://fakeimg.pl/1920x1080/?text=' . $this->faker->word,
             'tour_id' => $this->faker->randomElement($tours),
         ];
     }

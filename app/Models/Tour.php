@@ -72,12 +72,30 @@ class Tour extends Model
     }
 
     /**
-     * prices relationship
+     * departure relationship
      *
      */
     public function tourDepartures()
     {
         return $this->hasMany(TourDeparture::class);
+    }
+
+    /**
+     * schedule relationship
+     *
+     */
+    public function tourSchedules()
+    {
+        return $this->hasMany(TourSchedule::class);
+    }
+
+    /**
+     * image relationship
+     *
+     */
+    public function tourImages()
+    {
+        return $this->hasMany(TourImage::class);
     }
 
     /**
@@ -106,6 +124,8 @@ class Tour extends Model
             'destination_name' => $this->destination->city ?? null,
             'prices' => $this->tourPrices ?? [],
             'departures' => $this->tourDepartures ?? [],
+            'schedules' => $this->tourSchedules ?? [],
+            'images' => $this->tourImages ?? [],
         ];
     }
 }

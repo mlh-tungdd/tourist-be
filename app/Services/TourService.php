@@ -41,6 +41,14 @@ class TourService implements TourServiceInterface
     public function getAllTour($params)
     {
         $query = null;
+        /**
+         * type
+         * - hot_sale
+         * - last_hour
+         * locale
+         * - nation
+         * - foreign
+         */
         $type = $params['type'] ?? null;
         $locale = $params['locale'] ?? null;
         $mostView = $params['views'] ?? null;
@@ -95,7 +103,7 @@ class TourService implements TourServiceInterface
             $query->whereHas('tourDepartures', function ($q) use ($now) {
                 $q->where('start_day', '>', $now);
             });
-            $query = $query->limit(8)->get();
+            $query = $query->limit(10)->get();
         } else {
             $query = $query->get();
         }
@@ -148,7 +156,7 @@ class TourService implements TourServiceInterface
      */
     public function showTour($id)
     {
-        return $this->tour->findOrFail($id);
+        return $this->tour->findOrFail($id)->getTourResponse();
     }
 
     /**
@@ -169,9 +177,16 @@ class TourService implements TourServiceInterface
         $query = $this->tour->where('destination_id', $id)->orderByDesc('created_at')
             ->whereHas('tourDepartures', function ($q) use ($now) {
                 $q->where('start_day', '>', $now);
-            });
-        return $query->get()->map(function ($item) {
-            return $item->getTourResponse();
-        });
+            })
+            ->paginate();
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getTourResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+        ];
     }
 }

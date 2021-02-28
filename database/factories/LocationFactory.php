@@ -26,7 +26,7 @@ class LocationFactory extends Factory
             'city' => $this->faker->city,
             'description' => $this->faker->text(200),
             'content' => $this->faker->text(200),
-            'thumbnail' => 'https://fakeimg.pl/700x400/?text=' . $this->faker->word,
+            'thumbnail' => 'https://fakeimg.pl/1920x1080/?text=' . $this->faker->word,
             'type' => $this->faker->numberBetween($min = 0, $max = 1),
             'is_departure' => $this->faker->numberBetween($min = 0, $max = 1),
         ];
