@@ -23,7 +23,7 @@ class TourDepartureFactory extends Factory
     {
         $tours = \App\Models\Tour::get()->pluck('id')->toArray();
         return [
-            'start_day' => $this->faker->dateTime(),
+            'start_day' => $this->faker->dateTimeBetween('now', '+3 years'),
             'tour_id' => $this->faker->randomElement($tours),
         ];
     }
