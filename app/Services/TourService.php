@@ -52,6 +52,7 @@ class TourService implements TourServiceInterface
         $type = $params['type'] ?? null;
         $locale = $params['locale'] ?? null;
         $mostView = $params['views'] ?? null;
+        $detail = $params['detail'] ?? null;
         $now = now();
         $lastDay = $now->addDay();
 
@@ -103,7 +104,20 @@ class TourService implements TourServiceInterface
             $query->whereHas('tourDepartures', function ($q) use ($now) {
                 $q->where('start_day', '>', $now);
             });
-            $query = $query->limit(10)->get();
+            if ($detail == null) {
+                $query = $query->limit(10)->get();
+            } else {
+                $query = $query->paginate();
+                return [
+                    'data' => $query->map(function ($item) {
+                        return $item->getTourResponse();
+                    }),
+                    'per_page' => $query->perPage(),
+                    'total' => $query->total(),
+                    'current_page' => $query->currentPage(),
+                    'last_page' => $query->lastPage(),
+                ];
+            }
         } else {
             $query = $query->get();
         }
