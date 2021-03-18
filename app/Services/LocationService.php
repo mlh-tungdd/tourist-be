@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use App\Models\Location;
+use App\Models\Time;
 
 class LocationService implements LocationServiceInterface
 {
     protected $location;
+    protected $time;
 
-    public function __construct(Location $location)
+    public function __construct(Location $location, Time $time)
     {
         $this->location = $location;
+        $this->time = $time;
     }
 
     /**
@@ -104,5 +107,34 @@ class LocationService implements LocationServiceInterface
     public function updateLocation($params)
     {
         $this->location->findOrFail($params['id'])->update($params);
+    }
+
+    /**
+     *
+     */
+    public function getListNavigationClient()
+    {
+        return [
+            "NORTHERN" => $this->location->where("regions", 1)->get(),
+            "CENTRAL" => $this->location->where("regions", 2)->get(),
+            "SOUTH" => $this->location->where("regions", 3)->get(),
+            "ASIA" => $this->location->where("regions", 4)->get(),
+            "EUROPE" => $this->location->where("regions", 5)->get(),
+            "AMERICAS" => $this->location->where("regions", 6)->get(),
+            "OTHER" => $this->location->where("regions", 7)->get(),
+        ];
+    }
+
+    /**
+     *
+     */
+    public function getFilterClient()
+    {
+        return [
+            "departures" => $this->location->where("is_departure", 1)->get(),
+            "nations" => $this->location->where("type", 0)->get(),
+            "foreigns" => $this->location->where("type", 1)->get(),
+            "times" => $this->time->get(),
+        ];
     }
 }

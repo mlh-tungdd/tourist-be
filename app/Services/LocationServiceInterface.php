@@ -15,4 +15,8 @@ interface LocationServiceInterface
     public function showLocation($id);
 
     public function updateLocation($params);
+
+    public function getListNavigationClient();
+
+    public function getFilterClient();
 }

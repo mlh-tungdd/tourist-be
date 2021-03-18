@@ -148,4 +148,22 @@ class LocationController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     *
+     */
+    public function getListNavigationClient()
+    {
+        $list = $this->locationService->getListNavigationClient();
+        return $this->response->withData($list);
+    }
+
+    /**
+     *
+     */
+    public function getFilterClient()
+    {
+        $list = $this->locationService->getFilterClient();
+        return $this->response->withData($list);
+    }
 }

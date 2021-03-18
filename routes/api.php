@@ -24,6 +24,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/tours/get_by_location_id/{id}', 'TourController@getListTourByLocationId');
     Route::get('/tours/{id}', 'TourController@show');
 
+    Route::get('/locations/get_filters', 'LocationController@getFilterClient');
+    Route::get('/locations/get_navigations', 'LocationController@getListNavigationClient');
     Route::get('/locations/all_location', 'LocationController@all');
     Route::get('/locations/{id}', 'LocationController@show');
 
