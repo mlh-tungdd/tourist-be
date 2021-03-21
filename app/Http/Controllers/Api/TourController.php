@@ -170,4 +170,20 @@ class TourController extends ApiController
         ]);
         return $this->response->withData($tours);
     }
+
+    /**
+     * Search tour
+     */
+    public function filterTour(Request $request)
+    {
+        $list = $this->tourService->filterTour([
+            'locale' => $request->locale,
+            'departure' => $request->departure,
+            'destination' => $request->destination,
+            'start' => $request->start,
+            'time' => $request->time,
+            'price' => $request->price,
+        ]);
+        return $this->response->withData($list);
+    }
 }

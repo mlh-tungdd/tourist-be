@@ -184,6 +184,9 @@ class TourService implements TourServiceInterface
         $this->tour->findOrFail($params['id'])->update($params);
     }
 
+    /**
+     * getListTourByLocationId
+     */
     public function getListTourByLocationId($params)
     {
         $id = $params['id'];
@@ -193,6 +196,61 @@ class TourService implements TourServiceInterface
                 $q->where('start_day', '>', $now);
             })
             ->paginate();
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getTourResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+        ];
+    }
+
+    /**
+     * filterTour
+     */
+    public function filterTour($params)
+    {
+        $locale = $params['locale'] ?? null;
+        $departure = $params['departure'] ?? null;
+        $destination = $params['destination'] ?? null;
+        $start = $params['start'] ?? null;
+        $time = $params['time'] ?? null;
+        $price = $params['price'] ?? null;
+
+        $now = now();
+        $query = $this->tour->orderByDesc('created_at');
+        $query->whereHas('tourDepartures', function ($q) use ($now) {
+            $q->where('start_day', '>', $now);
+        });
+        if ($locale != null) {
+            $query->whereHas('destination', function ($q) use ($locale) {
+                $q->where('type', $locale);
+            });
+        }
+        if ($departure != null) {
+            $query->whereHas('departure', function ($q) use ($departure) {
+                $q->where('id', $departure);
+            });
+        }
+        if($destination != null) {
+            $query->whereHas('destination', function ($q) use ($destination) {
+                $q->where('id', $destination);
+            });
+        }
+        if ($time != null) {
+            $query->whereHas('time', function ($q) use ($time) {
+                $q->where('id', $time);
+            });
+        }
+        if($start != null) {
+            $query->whereHas('tourDepartures', function ($q) use ($start) {
+                $q->where('start_day', $start);
+            });
+        }
+
+        $query = $query->paginate();
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourResponse();

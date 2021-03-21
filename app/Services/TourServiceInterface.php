@@ -17,4 +17,6 @@ interface TourServiceInterface
     public function updateTour($params);
 
     public function getListTourByLocationId($params);
+
+    public function filterTour($params);
 }

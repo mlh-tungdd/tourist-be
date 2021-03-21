@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/logout', 'AuthController@logout');
 
     Route::get('/tours', 'TourController@index');
+    Route::get('/tours/search', 'TourController@filterTour');
     Route::get('/tours/all_tour', 'TourController@all');
     Route::get('/tours/get_by_location_id/{id}', 'TourController@getListTourByLocationId');
     Route::get('/tours/{id}', 'TourController@show');
