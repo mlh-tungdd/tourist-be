@@ -104,7 +104,7 @@ class BannerController extends ApiController
                 $filenameByRequest = $request->file('thumbnail')->getClientOriginalName();
                 $fileName = pathinfo($filenameByRequest, PATHINFO_FILENAME);
                 $extension = $request->file('thumbnail')->getClientOriginalExtension();
-                $fileName = env('APP_URL') . $fileName . '_' . time() . '.' . $extension;
+                $fileName = $fileName . '_' . time() . '.' . $extension;
 
                 $request->file('thumbnail')->move(public_path('images/' . $this->folder), $fileName);
 
@@ -119,7 +119,7 @@ class BannerController extends ApiController
                 'title' => $request->title,
                 'url' => $request->url,
             ]);
-            return $this->response->withMessage('Update successful');
+            return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }
@@ -135,7 +135,7 @@ class BannerController extends ApiController
     {
         try {
             $this->bannerService->deleteBanner($id);
-            return $this->response->withMessage('Delete successful');
+            return $this->response->withMessage('Xoá thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }

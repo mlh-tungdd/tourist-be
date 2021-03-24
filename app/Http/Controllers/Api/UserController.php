@@ -42,7 +42,7 @@ class UserController extends ApiController
     {
         try {
             $this->userService->delete($id);
-            return $this->response->withMessage('Delete success');
+            return $this->response->withMessage('Xoá thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }
@@ -70,7 +70,7 @@ class UserController extends ApiController
     {
         try {
             $this->userService->updateUserProfile($request->all());
-            return $this->response->withMessage('Update success');
+            return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }
@@ -89,12 +89,12 @@ class UserController extends ApiController
                 $this->userService->updateUserProfile([
                     'password' => Hash::make($request->new_password)
                 ]);
-                return $this->response->withMessage('Change password success');
+                return $this->response->withMessage('Thay đổi password thành công');
             } catch (Exception $ex) {
                 return $this->response->errorForbidden();
             }
         } else {
-            return $this->response->errorUnauthorized('Incorrect password');
+            return $this->response->errorUnauthorized('Sai mật khẩu');
         }
     }
 }
