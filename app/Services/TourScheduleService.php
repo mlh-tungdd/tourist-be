@@ -95,11 +95,11 @@ class TourScheduleService implements TourScheduleServiceInterface
      */
     public function updateTourSchedule($params)
     {
-        $schedulesRemove = $params['schedulesRemove'];
+        $schedulesRemove = $params['schedules_remove'];
         $schedules = $params['schedules'];
 
         foreach ($schedules as $value) {
-            $this->tourSchedule->findOrFail($value['_id'])->update([
+            $this->tourSchedule->findOrFail($value['id'])->update([
                 'title' => $value['title'],
                 'content' => $value['content'],
                 'day_number' => $value['day_number'],

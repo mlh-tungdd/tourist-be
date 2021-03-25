@@ -110,11 +110,11 @@ class TourImageService implements TourImageServiceInterface
      */
     public function updateTourImage($params)
     {
-        $imagesRemove = $params['imagesRemove'];
+        $imagesRemove = $params['images_remove'];
         $images = $params['images'];
 
         foreach ($images as $value) {
-            $this->tourImage->findOrFail($value['_id'])->update([
+            $this->tourImage->findOrFail($value['id'])->update([
                 'type' => $value['type'],
                 'thumbnail' => $value['thumbnail'],
             ]);

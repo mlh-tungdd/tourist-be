@@ -99,7 +99,7 @@ class TourPriceService implements TourPriceServiceInterface
         $prices = $params['prices'];
 
         foreach ($prices as $value) {
-            $this->tourPrice->findOrFail($value['_id'])->update([
+            $this->tourPrice->findOrFail($value['id'])->update([
                 'type_customer' => $value['type_customer'],
                 'original_price' => $value['original_price'],
                 'price' => $value['price'],

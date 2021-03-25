@@ -93,11 +93,11 @@ class TourDepartureService implements TourDepartureServiceInterface
      */
     public function updateTourDeparture($params)
     {
-        $departuresRemove = $params['departuresRemove'];
+        $departuresRemove = $params['departures_remove'];
         $departures = $params['departures'];
 
         foreach ($departures as $value) {
-            $this->tourDeparture->findOrFail($value['_id'])->update([
+            $this->tourDeparture->findOrFail($value['id'])->update([
                 'start_day' => $value['start_day'],
             ]);
         }
