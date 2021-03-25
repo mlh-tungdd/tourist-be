@@ -95,7 +95,7 @@ class TourPriceService implements TourPriceServiceInterface
      */
     public function updateTourPrice($params)
     {
-        $pricesRemove = $params['pricesRemove'];
+        $pricesRemove = $params['prices_remove'];
         $prices = $params['prices'];
 
         foreach ($prices as $value) {
