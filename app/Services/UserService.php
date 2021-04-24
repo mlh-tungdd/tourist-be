@@ -38,7 +38,7 @@ class UserService implements UserServiceInterface
      */
     public function register($params)
     {
-        $this->user->create([
+        return $this->user->create([
             'fullname' => $params['fullname'],
             'username' => $params['username'],
             'email' => $params['email'],

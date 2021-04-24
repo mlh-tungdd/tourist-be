@@ -2,64 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\OrderDetail;
+use Exception;
 use Illuminate\Http\Request;
+use App\Services\OrderDetailServiceInterface;
 
-class OrderDetailController extends Controller
+class OrderDetailController extends ApiController
 {
+    protected $orderDetailService;
+    protected $response;
+
     /**
-     * Display a listing of the resource.
+     * construct function
      *
-     * @return \Illuminate\Http\Response
+     * @param OrderDetailServiceInterface $orderDetail
+     * @param ApiResponse $response
      */
-    public function index()
+    public function __construct(OrderDetailServiceInterface $orderDetailService, ApiResponse $response)
     {
-        //
+        $this->orderDetailService = $orderDetailService;
+        $this->response = $response;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a all of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function all(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrderDetail $orderDetail)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OrderDetail $orderDetail)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OrderDetail $orderDetail)
-    {
-        //
+        $list = $this->orderDetailService->getAllOrderDetail($request->all());
+        return $this->response->withData($list);
     }
 }
