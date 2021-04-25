@@ -19,6 +19,21 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
 
+    // room
+    Route::get('/rooms/all_room/{id}', 'RoomController@all');
+    Route::post('/rooms', 'RoomController@store');
+    Route::get('/rooms/delete/{id}', 'RoomController@destroy');
+    Route::get('/rooms/{id}', 'RoomController@show');
+    Route::post('/rooms/{id}', 'RoomController@update');
+
+    // hotel
+    Route::get('/hotels', 'HotelController@index');
+    Route::get('/hotels/all_hotel', 'HotelController@all');
+    Route::post('/hotels', 'HotelController@store');
+    Route::get('/hotels/delete/{id}', 'HotelController@destroy');
+    Route::get('/hotels/{id}', 'HotelController@show');
+    Route::post('/hotels/{id}', 'HotelController@update');
+
     // order
     Route::get('/orders', 'OrderController@index');
     Route::get('/orders/all_order', 'OrderController@all');

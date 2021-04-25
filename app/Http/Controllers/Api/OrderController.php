@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\Order;
 use App\Http\Requests\OrderRequest;
 use App\Services\OrderServiceInterface;
 use App\Services\UserServiceInterface;

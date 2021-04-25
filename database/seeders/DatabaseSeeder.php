@@ -31,5 +31,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Partner::factory(10)->create();
         \App\Models\CategoryNews::factory(10)->create();
         \App\Models\News::factory(10)->create();
+        \App\Models\Hotel::factory(10)->create();
+        \App\Models\Room::factory(10)->create();
     }
 }

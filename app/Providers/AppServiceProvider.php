@@ -92,6 +92,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\OrderDetailServiceInterface::class,
             \App\Services\OrderDetailService::class
         );
+
+        $this->app->singleton(
+            \App\Services\HotelServiceInterface::class,
+            \App\Services\HotelService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\RoomServiceInterface::class,
+            \App\Services\RoomService::class
+        );
     }
 
     /**
