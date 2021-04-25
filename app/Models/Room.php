@@ -19,7 +19,7 @@ class Room extends Model
      */
     public function hotel()
     {
-        return $this->hasOne(Hotel::class, 'hotel_id');
+        return $this->belongsTo(Hotel::class, "hotel_id");
     }
 
     /**
@@ -60,6 +60,7 @@ class Room extends Model
             'note' => $this->note,
             'convenients' => $this->convenients,
             'hotel_id' => $this->hotel_id,
+            'hotel' => $this->hotel ?? null
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\OrderRequest;
 use App\Services\OrderServiceInterface;
 use App\Services\UserServiceInterface;
 use App\Services\OrderDetailServiceInterface;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends ApiController
 {
@@ -83,6 +84,7 @@ class OrderController extends ApiController
             }
 
             foreach ($request->carts as $cart) {
+                $totalQty = 0;
                 foreach ($cart['departures'] as $departure) {
                     foreach ($departure['prices'] as $price) {
                         $this->orderDetailService->createOrderDetail([
@@ -94,8 +96,13 @@ class OrderController extends ApiController
                             'price' => $price['price'],
                             'type_customer' => $price['type_customer'],
                         ]);
+                        $totalQty += $price['qty'];
                     }
                 }
+                $tour = DB::table("tours")->where('id', $cart['id'])->first();
+                DB::table("tours")->where('id', $cart['id'])->update([
+                    'space' => $tour->space - $totalQty
+                ]);
             }
 
             return $this->response->withCreated();
