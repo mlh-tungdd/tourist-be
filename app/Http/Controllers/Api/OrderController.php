@@ -136,9 +136,6 @@ class OrderController extends ApiController
             $this->orderService->updateOrder([
                 'id' => $id,
                 'status' => $request->status,
-                'payment_method' => $request->payment_method,
-                'payment_type' => $request->payment_type,
-                'user_id' => $request->user_id,
             ]);
             return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {

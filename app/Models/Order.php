@@ -28,6 +28,23 @@ class Order extends Model
     ];
 
     /**
+     * user relationship
+     *
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * tour relationship
+     */
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id');
+    }
+
+    /**
      * response
      *
      */
@@ -40,6 +57,8 @@ class Order extends Model
             'payment_method' => $this->payment_method,
             'payment_type' => $this->payment_type,
             'user_id' => $this->user_id,
+            'user' => $this->user ?? null,
+            'order_detail' => $this->orderDetail ?? null,
             'created_at' => $this->created_at,
         ];
     }

@@ -52,7 +52,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/orders', 'OrderController@store');
     Route::get('/orders/delete/{id}', 'OrderController@destroy');
     Route::get('/orders/{id}', 'OrderController@show');
-    Route::post('/orders/{id}', 'OrderController@update');
+    Route::patch('/orders/{id}', 'OrderController@update');
 
     Route::get('/tours', 'TourController@index');
     Route::get('/tours/search', 'TourController@filterTour');
