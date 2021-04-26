@@ -20,7 +20,20 @@ class HotelService implements HotelServiceInterface
      */
     public function getListHotel($params)
     {
-        $query = $this->hotel->orderByDesc('created_at')->paginate();
+        $query = $this->hotel->orderByDesc('created_at');
+        $location = $params['location'] ?? null;
+        $star = $params['star'] ?? null;
+
+        if ($location != null) {
+            $query->where("location_id", $location);
+        }
+
+        if ($star != null) {
+            $query->where("star", $star);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getHotelResponse();
