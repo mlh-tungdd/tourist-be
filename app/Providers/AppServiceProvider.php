@@ -102,6 +102,21 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\RoomServiceInterface::class,
             \App\Services\RoomService::class
         );
+
+        $this->app->singleton(
+            \App\Services\BookingServiceInterface::class,
+            \App\Services\BookingService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\BookingDetailServiceInterface::class,
+            \App\Services\BookingDetailService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\SettingServiceInterface::class,
+            \App\Services\SettingService::class
+        );
     }
 
     /**

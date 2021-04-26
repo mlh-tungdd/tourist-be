@@ -16,13 +16,18 @@ class SettingSeeder extends Seeder
     {
         DB::table('settings')->insert([
             'title' => 'Tourist',
-            'description' => 'Lorem ipsum dolor',
+            'company' => 'CÔNG TY LỮ HÀNH TOURIST',
             'content' => 'Lorem ipsum dolor',
             'favicon' => '',
+            'website' => 'http://tourist-cl-app.herokuapp.com',
             'logo' => '',
-            'address' => '',
+            'address' => '18 Lý Thường Kiệt, Ph.Phan Chu Trinh, Q.Hoàn Kiếm, Hà Nội',
             'hotline' => '0973793xxx',
             'email' => 'tourist@gmail.com',
+            'facebook' => 'https://www.facebook.com/tunggdd',
+            'youtube' => 'https://www.facebook.com/tunggdd',
+            'google' => 'https://www.facebook.com/tunggdd',
+            'instagram' => 'https://www.facebook.com/tunggdd',
         ]);
     }
 }
