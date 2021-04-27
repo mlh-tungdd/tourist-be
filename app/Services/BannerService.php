@@ -20,7 +20,15 @@ class BannerService implements BannerServiceInterface
      */
     public function getListBanner($params)
     {
-        $query = $this->banner->orderByDesc('created_at')->paginate();
+        $query = $this->banner->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getBannerResponse();

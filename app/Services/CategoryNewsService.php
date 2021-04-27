@@ -20,7 +20,15 @@ class CategoryNewsService implements CategoryNewsServiceInterface
      */
     public function getListCategoryNews($params)
     {
-        $query = $this->categoryNews->orderByDesc('created_at')->paginate();
+        $query = $this->categoryNews->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getCategoryNewsResponse();

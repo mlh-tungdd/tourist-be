@@ -20,7 +20,15 @@ class PartnerService implements PartnerServiceInterface
      */
     public function getListPartner($params)
     {
-        $query = $this->partner->orderByDesc('created_at')->paginate();
+        $query = $this->partner->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getPartnerResponse();

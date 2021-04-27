@@ -20,7 +20,20 @@ class BookingService implements BookingServiceInterface
      */
     public function getListBooking($params)
     {
-        $query = $this->booking->orderByDesc('created_at')->paginate();
+        $query = $this->booking->orderByDesc('created_at');
+        $id = $params['id'] ?? null;
+        $status = $params['status'] ?? null;
+
+        if ($id != null) {
+            $query->where('id', $id);
+        }
+
+        if ($status != null) {
+            $query->where('status', $status);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getBookingResponse();

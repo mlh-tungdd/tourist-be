@@ -20,7 +20,30 @@ class OrderService implements OrderServiceInterface
      */
     public function getListOrder($params)
     {
-        $query = $this->order->orderByDesc('created_at')->paginate();
+        $query = $this->order->orderByDesc('created_at');
+        $id = $params['id'] ?? null;
+        $status = $params['status'] ?? null;
+        $paymentMethod = $params['payment_method'] ?? null;
+        $paymentType = $params['payment_type'] ?? null;
+
+        if ($id != null) {
+            $query->where('id', $id);
+        }
+
+        if ($status != null) {
+            $query->where('status', $status);
+        }
+
+        if ($paymentMethod != null) {
+            $query->where('payment_method', $paymentMethod);
+        }
+
+        if ($paymentType != null) {
+            $query->where('payment_type', $paymentType);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getOrderResponse();

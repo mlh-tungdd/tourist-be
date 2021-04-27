@@ -23,7 +23,30 @@ class LocationService implements LocationServiceInterface
      */
     public function getListLocation($params)
     {
-        $query = $this->location->orderByDesc('created_at')->paginate();
+        $query = $this->location->orderByDesc('created_at');
+        $city = $params['city'] ?? null;
+        $regions = $params['regions'] ?? null;
+        $type = $params['type'] ?? null;
+        $isDeparture = $params['is_departure'] ?? null;
+
+        if ($city != null) {
+            $query->where('city', 'like', '%' . $city . '%');
+        }
+
+        if ($regions != null) {
+            $query->where("regions", $regions);
+        }
+
+        if ($type != null) {
+            $query->where("type", $type);
+        }
+
+        if ($isDeparture != null) {
+            $query->where("is_departure", $isDeparture);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getLocationResponse();

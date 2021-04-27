@@ -21,7 +21,35 @@ class TourService implements TourServiceInterface
      */
     public function getListTour($params)
     {
-        $query = $this->tour->with(['time', 'departure', 'destination'])->orderByDesc('created_at')->paginate();
+        $query = $this->tour->with(['time', 'departure', 'destination'])->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+        $rollNumber = $params['roll_number'] ?? null;
+        $timeId = $params['time_id'] ?? null;
+        $departureId = $params['departure_id'] ?? null;
+        $destinationId = $params['destination_id'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        if ($rollNumber != null) {
+            $query->where('roll_number', $rollNumber);
+        }
+
+        if ($timeId != null) {
+            $query->where('time_id', $timeId);
+        }
+
+        if ($departureId != null) {
+            $query->where('departure_id', $departureId);
+        }
+
+        if ($destinationId != null) {
+            $query->where('destination_id', $destinationId);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourResponse();

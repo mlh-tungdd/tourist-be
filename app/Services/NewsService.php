@@ -20,7 +20,25 @@ class NewsService implements NewsServiceInterface
      */
     public function getListNews($params)
     {
-        $query = $this->news->orderByDesc('created_at')->paginate();
+        $query = $this->news->orderByDesc('created_at');
+        $title = $params['title'] ?? null;
+        $author = $params['author'] ?? null;
+        $categoryNewsId = $params['category_news_id'] ?? null;
+
+        if ($title != null) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        if ($author != null) {
+            $query->where('author', 'like', '%' . $author . '%');
+        }
+
+        if ($categoryNewsId != null) {
+            $query->where("category_news_id", $categoryNewsId);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getNewsResponse();
