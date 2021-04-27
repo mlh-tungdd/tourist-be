@@ -29,7 +29,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/bookings', 'BookingController@store');
     Route::get('/bookings/delete/{id}', 'BookingController@destroy');
     Route::get('/bookings/{id}', 'BookingController@show');
-    Route::post('/bookings/{id}', 'BookingController@update');
+    Route::patch('/bookings/{id}', 'BookingController@update');
 
     // room
     Route::get('/rooms/all_room/{id}', 'RoomController@all');

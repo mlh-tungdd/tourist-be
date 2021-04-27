@@ -58,7 +58,7 @@ class Order extends Model
             'payment_type' => $this->payment_type,
             'user_id' => $this->user_id,
             'user' => $this->user ?? null,
-            'order_detail' => $this->orderDetail ?? null,
+            'order_details' => $this->orderDetail ?? null,
             'created_at' => $this->created_at,
         ];
     }

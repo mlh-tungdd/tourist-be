@@ -26,6 +26,23 @@ class Booking extends Model
     ];
 
     /**
+     * user relationship
+     *
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * tour relationship
+     */
+    public function bookingDetail()
+    {
+        return $this->hasMany(BookingDetail::class, 'booking_id');
+    }
+
+    /**
      * response
      *
      */
@@ -36,6 +53,8 @@ class Booking extends Model
             'total' => $this->total,
             'status' => $this->status,
             'user_id' => $this->user_id,
+            'user' => $this->user ?? null,
+            'booking_details' => $this->bookingDetail ?? null,
             'created_at' => $this->created_at,
         ];
     }

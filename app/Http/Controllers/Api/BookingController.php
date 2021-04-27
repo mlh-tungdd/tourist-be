@@ -128,7 +128,6 @@ class BookingController extends ApiController
             $this->bookingService->updateBooking([
                 'id' => $id,
                 'status' => $request->status,
-                'user_id' => $request->user_id,
             ]);
             return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {
