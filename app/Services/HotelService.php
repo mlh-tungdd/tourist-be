@@ -21,8 +21,9 @@ class HotelService implements HotelServiceInterface
     public function getListHotel($params)
     {
         $query = $this->hotel->orderByDesc('created_at');
-        $location = $params['location'] ?? null;
+        $location = $params['location_id'] ?? null;
         $star = $params['star'] ?? null;
+        $name = $params['name'] ?? null;
 
         if ($location != null) {
             $query->where("location_id", $location);
@@ -30,6 +31,10 @@ class HotelService implements HotelServiceInterface
 
         if ($star != null) {
             $query->where("star", $star);
+        }
+
+        if ($name != null) {
+            $query->where('name', 'like', '%' . $name . '%');
         }
 
         $query = $query->paginate();

@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     // room
     Route::get('/rooms/all_room/{id}', 'RoomController@all');
+    Route::get('/rooms/by_hotel_id/{id}', 'RoomController@getAllRoomByHotelId');
     Route::post('/rooms', 'RoomController@store');
     Route::get('/rooms/delete/{id}', 'RoomController@destroy');
     Route::get('/rooms/{id}', 'RoomController@show');
