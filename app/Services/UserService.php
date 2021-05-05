@@ -23,11 +23,39 @@ class UserService implements UserServiceInterface
      */
     public function getList($params)
     {
-        $query = $this->user->where('id', '!=', JWTAuth::user()->id)->orderBy('id', 'desc');
-        if (isset($params['username'])) {
-            return $query->where('username', 'like', '%' . $params['username'] . '%')->paginate();
+        $query = $this->user->where('id', '!=', JWTAuth::user()->id)->orderByDesc('created_at');
+        $username = $params['username'] ?? null;
+        $fullname = $params['fullname'] ?? null;
+        $email = $params['email'] ?? null;
+        $permission = $params['permission'] ?? null;
+
+        if ($username != null) {
+            $query->where('username', 'like', '%' . $username . '%');
         }
-        return $query->paginate();
+
+        if ($fullname != null) {
+            $query->where('fullname', 'like', '%' . $fullname . '%');
+        }
+
+        if ($email != null) {
+            $query->where('email', 'like', '%' . $email . '%');
+        }
+
+        if ($permission != null) {
+            $query->where('permission', $permission);
+        }
+
+        $query = $query->paginate();
+
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getUserResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+        ];
     }
 
     /**
