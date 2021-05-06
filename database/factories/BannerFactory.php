@@ -25,6 +25,7 @@ class BannerFactory extends Factory
             'title' => $this->faker->sentence(6, true),
             'url' => $this->faker->url,
             'thumbnail' => 'https://fakeimg.pl/1920x1080/?text=' . $this->faker->word,
+            'active' => 1
         ];
     }
 }

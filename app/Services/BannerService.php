@@ -27,6 +27,11 @@ class BannerService implements BannerServiceInterface
             $query->where('title', 'like', '%' . $title . '%');
         }
 
+        $active = $params['active'] ?? null;
+        if ($active != null) {
+            $query->where('active', $active);
+        }
+
         $query = $query->paginate();
 
         return [
@@ -65,6 +70,7 @@ class BannerService implements BannerServiceInterface
             'title' => $params['title'],
             'url' => $params['url'],
             'thumbnail' => $params['thumbnail'],
+            'active' => $params['active']
         ]);
     }
 
@@ -87,7 +93,7 @@ class BannerService implements BannerServiceInterface
      */
     public function showBanner($id)
     {
-        return $this->banner->findOrFail($id);
+        return $this->banner->findOrFail($id)->getBannerResponse();
     }
 
     /**

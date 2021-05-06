@@ -80,6 +80,7 @@ class TourController extends ApiController
                 'vehicle' => $request->vehicle,
                 'departure_id' => $request->departure_id,
                 'destination_id' => $request->destination_id,
+                'active' => $request->active,
                 'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
             ]);
             return $this->response->withCreated();
@@ -137,6 +138,7 @@ class TourController extends ApiController
                 'tour_id' => $request->tour_id,
                 'departure_id' => $request->departure_id,
                 'destination_id' => $request->destination_id,
+                'active' => $request->active,
             ]);
             return $this->response->withMessage('Update successful');
         } catch (Exception $ex) {
@@ -185,5 +187,21 @@ class TourController extends ApiController
             'price' => $request->price,
         ]);
         return $this->response->withData($list);
+    }
+
+    /**
+     * Cập nhật status
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $this->tourService->updateTour([
+                'id' => $id,
+                'active' => $request->active,
+            ]);
+            return $this->response->withMessage('Cập nhật trạng thái thành công');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
     }
 }

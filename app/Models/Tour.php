@@ -33,6 +33,7 @@ class Tour extends Model
         'departure_id',
         'destination_id',
         'views',
+        'active'
     ];
 
     /**
@@ -126,6 +127,7 @@ class Tour extends Model
             'departures' => $this->tourDepartures ?? [],
             'schedules' => $this->tourSchedules ?? [],
             'images' => $this->tourImages ?? [],
+            'active' => $this->active
         ];
     }
 }

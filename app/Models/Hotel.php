@@ -37,6 +37,7 @@ class Hotel extends Model
         'thumbnail',
         'from_price',
         'location_id',
+        'active',
     ];
 
     /**
@@ -57,6 +58,7 @@ class Hotel extends Model
             'from_price' => $this->from_price,
             'location_id' => $this->location_id,
             'location_name' => $this->location->city ?? null,
+            'active' => $this->active,
         ];
     }
 }

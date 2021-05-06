@@ -76,6 +76,7 @@ class HotelController extends ApiController
                 'active' => $request->active,
                 'from_price' => $request->from_price,
                 'location_id' => $request->location_id,
+                'active' => $request->active,
                 'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
             ]);
             return $this->response->withCreated();
@@ -130,6 +131,7 @@ class HotelController extends ApiController
                 'active' => $request->active,
                 'from_price' => $request->from_price,
                 'location_id' => $request->location_id,
+                'active' => $request->active,
             ]);
             return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {
@@ -148,6 +150,22 @@ class HotelController extends ApiController
         try {
             $this->hotelService->deleteHotel($id);
             return $this->response->withMessage('Xoá thành công');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
+
+    /**
+     * Cập nhật status
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $this->hotelService->updateHotel([
+                'id' => $id,
+                'active' => $request->active,
+            ]);
+            return $this->response->withMessage('Cập nhật trạng thái thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }

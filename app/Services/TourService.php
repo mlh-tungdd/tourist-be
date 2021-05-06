@@ -48,6 +48,11 @@ class TourService implements TourServiceInterface
             $query->where('destination_id', $destinationId);
         }
 
+        $active = $params['active'] ?? null;
+        if ($active != null) {
+            $query->where('active', $active);
+        }
+
         $query = $query->paginate();
 
         return [
@@ -176,6 +181,7 @@ class TourService implements TourServiceInterface
             'vehicle' => $params['vehicle'],
             'departure_id' => $params['departure_id'],
             'destination_id' => $params['destination_id'],
+            'active' => $params['active'],
         ]);
     }
 
@@ -276,6 +282,10 @@ class TourService implements TourServiceInterface
             $query->whereHas('tourDepartures', function ($q) use ($start) {
                 $q->where('start_day', $start);
             });
+        }
+        $active = $params['active'] ?? null;
+        if ($active != null) {
+            $query->where('active', $active);
         }
 
         $query = $query->paginate();

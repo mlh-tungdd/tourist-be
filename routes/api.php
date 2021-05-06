@@ -46,6 +46,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/hotels/delete/{id}', 'HotelController@destroy');
     Route::get('/hotels/{id}', 'HotelController@show');
     Route::post('/hotels/{id}', 'HotelController@update');
+    Route::patch('/hotels/{id}', 'HotelController@updateStatus');
 
     // order
     Route::get('/orders', 'OrderController@index');
@@ -96,6 +97,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('/tours', 'TourController@store');
         Route::get('/tours/delete/{id}', 'TourController@destroy');
         Route::post('/tours/{id}', 'TourController@update');
+        Route::patch('/tours/{id}', 'TourController@updateStatus');
 
         // tour depature
         Route::get('/tour_departures', 'TourDepartureController@index');
@@ -141,6 +143,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/banners/delete/{id}', 'BannerController@destroy');
         Route::get('/banners/{id}', 'BannerController@show');
         Route::post('/banners/{id}', 'BannerController@update');
+        Route::patch('/banners/{id}', 'BannerController@updateStatus');
 
         // partner
         Route::post('/partners', 'PartnerController@store');

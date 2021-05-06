@@ -38,6 +38,7 @@ class TourFactory extends Factory
             'time_id' => $this->faker->randomElement($times),
             'departure_id' => $this->faker->randomElement($departures),
             'destination_id' => $this->faker->randomElement($destinations),
+            'active' => 1
         ];
     }
 }

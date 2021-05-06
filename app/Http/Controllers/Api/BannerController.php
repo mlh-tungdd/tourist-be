@@ -70,6 +70,7 @@ class BannerController extends ApiController
             $this->bannerService->createBanner([
                 'title' => $request->title,
                 'url' => $request->url,
+                'active' => $request->active,
                 'thumbnail' => env('APP_URL') . "/images/" . $this->folder . '/' . $fileName,
             ]);
             return $this->response->withCreated();
@@ -118,6 +119,7 @@ class BannerController extends ApiController
                 'id' => $id,
                 'title' => $request->title,
                 'url' => $request->url,
+                'active' => $request->active,
             ]);
             return $this->response->withMessage('Cập nhật thành công');
         } catch (Exception $ex) {
@@ -136,6 +138,22 @@ class BannerController extends ApiController
         try {
             $this->bannerService->deleteBanner($id);
             return $this->response->withMessage('Xoá thành công');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
+
+    /**
+     * Cập nhật status
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $this->bannerService->updateBanner([
+                'id' => $id,
+                'active' => $request->active,
+            ]);
+            return $this->response->withMessage('Cập nhật trạng thái thành công');
         } catch (Exception $ex) {
             return $this->response->errorWrongArgs($ex->getMessage());
         }

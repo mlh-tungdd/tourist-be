@@ -28,6 +28,7 @@ class CreateToursTable extends Migration
             $table->bigInteger('departure_id')->unsigned()->nullable();
             $table->bigInteger('destination_id')->unsigned()->nullable();
             $table->integer('views')->default(0)->nullable();
+            $table->integer('active')->default(1);
             $table->foreign('time_id')->references('id')->on('times')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('departure_id')->references('id')->on('locations')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('destination_id')->references('id')->on('locations')->onUpdate('cascade')->onDelete('cascade');

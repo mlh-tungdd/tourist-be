@@ -22,6 +22,7 @@ class Banner extends Model
         'title',
         'url',
         'thumbnail',
+        'active'
     ];
 
     /**
@@ -35,6 +36,7 @@ class Banner extends Model
             'title' => $this->title,
             'url' => $this->url,
             'thumbnail' => $this->thumbnail,
+            'active' => $this->active
         ];
     }
 }

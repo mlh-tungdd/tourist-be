@@ -37,6 +37,11 @@ class HotelService implements HotelServiceInterface
             $query->where('name', 'like', '%' . $name . '%');
         }
 
+        $active = $params['active'] ?? null;
+        if ($active != null) {
+            $query->where('active', $active);
+        }
+
         $query = $query->paginate();
 
         return [
@@ -81,6 +86,7 @@ class HotelService implements HotelServiceInterface
             'thumbnail' => $params['thumbnail'],
             'from_price' => $params['from_price'],
             'location_id' => $params['location_id'],
+            'active' => $params['active'],
         ]);
     }
 
