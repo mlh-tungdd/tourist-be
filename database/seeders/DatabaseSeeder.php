@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TimeSeeder::class,
             SettingSeeder::class,
             LocationSeeder::class,
+            BankSeeder::class
         ]);
         \App\Models\User::factory(10)->create();
         \App\Models\Tour::factory(10)->create();

@@ -31,6 +31,22 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/bookings/{id}', 'BookingController@show');
     Route::patch('/bookings/{id}', 'BookingController@update');
 
+    // bank
+    Route::get('/banks', 'BankController@index');
+    Route::get('/banks/all_bank', 'BankController@all');
+    Route::post('/banks', 'BankController@store');
+    Route::get('/banks/delete/{id}', 'BankController@destroy');
+    Route::get('/banks/{id}', 'BankController@show');
+    Route::patch('/banks/{id}', 'BankController@update');
+
+    // rate
+    Route::get('/tour_rates/{id}', 'RateController@index');
+    Route::get('/rates/all_rate', 'RateController@all');
+    Route::post('/rates', 'RateController@store');
+    Route::get('/rates/delete/{id}', 'RateController@destroy');
+    Route::get('/rates/{id}', 'RateController@show');
+    Route::patch('/rates/{id}', 'RateController@update');
+
     // room
     Route::get('/rooms/all_room/{id}', 'RoomController@all');
     Route::get('/rooms/by_hotel_id/{id}', 'RoomController@getAllRoomByHotelId');

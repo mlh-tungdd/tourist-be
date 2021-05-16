@@ -117,6 +117,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\SettingServiceInterface::class,
             \App\Services\SettingService::class
         );
+
+        $this->app->singleton(
+            \App\Services\BankServiceInterface::class,
+            \App\Services\BankService::class
+        );
+
+        $this->app->singleton(
+            \App\Services\RateServiceInterface::class,
+            \App\Services\RateService::class
+        );
     }
 
     /**
