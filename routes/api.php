@@ -45,7 +45,14 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/rates', 'RateController@store');
     Route::get('/rates/delete/{id}', 'RateController@destroy');
     Route::get('/rates/{id}', 'RateController@show');
-    Route::patch('/rates/{id}', 'RateController@update');
+
+    // discount
+    Route::get('/discounts', 'DiscountController@index');
+    Route::get('/discounts/all_discount', 'DiscountController@all');
+    Route::post('/discounts', 'DiscountController@store');
+    Route::get('/discounts/delete/{id}', 'DiscountController@destroy');
+    Route::get('/discounts/{id}', 'DiscountController@show');
+    Route::patch('/discounts/{id}', 'DiscountController@update');
 
     // room
     Route::get('/rooms/all_room/{id}', 'RoomController@all');

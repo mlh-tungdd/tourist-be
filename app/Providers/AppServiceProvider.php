@@ -127,6 +127,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\RateServiceInterface::class,
             \App\Services\RateService::class
         );
+
+        $this->app->singleton(
+            \App\Services\DiscountServiceInterface::class,
+            \App\Services\DiscountService::class
+        );
     }
 
     /**
