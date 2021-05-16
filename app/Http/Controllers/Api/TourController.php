@@ -139,6 +139,7 @@ class TourController extends ApiController
                 'departure_id' => $request->departure_id,
                 'destination_id' => $request->destination_id,
                 'active' => $request->active,
+                'vehicle' => $request->vehicle,
             ]);
             return $this->response->withMessage('Update successful');
         } catch (Exception $ex) {
@@ -165,10 +166,11 @@ class TourController extends ApiController
     /**
      * Get tour by location id
      */
-    public function getListTourByLocationId($id)
+    public function getListTourByLocationId(Request $request, $id)
     {
         $tours = $this->tourService->getListTourByLocationId([
-            'id' => $id
+            'id' => $id,
+            'tourId' => $request->tour_id
         ]);
         return $this->response->withData($tours);
     }

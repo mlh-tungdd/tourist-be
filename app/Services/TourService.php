@@ -88,12 +88,17 @@ class TourService implements TourServiceInterface
         $detail = $params['detail'] ?? null;
         $now = now();
         $lastDay = $now->addDay();
+        $active = $params['active'] ?? null;
 
         if ($mostView == null) {
             $query = $this->tour->orderByDesc('created_at');
         } else {
             $query = $this->tour->orderByDesc('views')
                 ->where('views', '!=', 0);
+        }
+
+        if ($active != null) {
+            $query->where('active', $active);
         }
 
         if ($type != null) {
@@ -224,12 +229,19 @@ class TourService implements TourServiceInterface
     public function getListTourByLocationId($params)
     {
         $id = $params['id'];
+        $tourId = $params['tourId'] ?? null;
         $now = now();
-        $query = $this->tour->where('destination_id', $id)->orderByDesc('created_at')
+        $query = $this->tour->where('active', 1)->where('destination_id', $id)->orderByDesc('created_at')
             ->whereHas('tourDepartures', function ($q) use ($now) {
                 $q->where('start_day', '>', $now);
-            })
-            ->paginate();
+            });
+
+        if ($tourId != null) {
+            $query->where('id', '!=', $tourId);
+        }
+
+        $query = $query->paginate();
+
         return [
             'data' => $query->map(function ($item) {
                 return $item->getTourResponse();
@@ -268,7 +280,7 @@ class TourService implements TourServiceInterface
                 $q->where('id', $departure);
             });
         }
-        if($destination != null) {
+        if ($destination != null) {
             $query->whereHas('destination', function ($q) use ($destination) {
                 $q->where('id', $destination);
             });
@@ -278,7 +290,7 @@ class TourService implements TourServiceInterface
                 $q->where('id', $time);
             });
         }
-        if($start != null) {
+        if ($start != null) {
             $query->whereHas('tourDepartures', function ($q) use ($start) {
                 $q->where('start_day', $start);
             });
