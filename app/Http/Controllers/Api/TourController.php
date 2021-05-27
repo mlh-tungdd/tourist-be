@@ -206,4 +206,21 @@ class TourController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Cập nhật views
+     */
+    public function updateViews($id)
+    {
+        try {
+            $tour = $this->tourService->showTour($id);
+            $this->tourService->updateTour([
+                'id' => $id,
+                'views' => $tour['views'] + 1,
+            ]);
+            return $this->response->withMessage('Cập nhật views thành công');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
 }

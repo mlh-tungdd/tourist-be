@@ -9,6 +9,7 @@ use App\Services\OrderServiceInterface;
 use App\Services\UserServiceInterface;
 use App\Services\OrderDetailServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class OrderController extends ApiController
 {
@@ -64,6 +65,7 @@ class OrderController extends ApiController
     {
         try {
             $order = null;
+            $emails = null;
             if (!$request->is_create_user) {
                 $order = $this->orderService->createOrder([
                     'total' => $request->total,
@@ -72,8 +74,10 @@ class OrderController extends ApiController
                     'payment_type' => $request->payment['type'],
                     'user_id' => $request->user['id'],
                 ]);
+                $emails = $request->user['email'];
             } else {
                 $user = $this->userService->register($request->user);
+                $emails = $user->email;
                 $order = $this->orderService->createOrder([
                     'total' => $request->total,
                     'status' => 0,
@@ -104,6 +108,8 @@ class OrderController extends ApiController
                     'space' => $tour->space - $totalQty
                 ]);
             }
+
+            Mail::to($emails)->send(new \App\Mail\SendMail(['emails' => $emails]));
 
             return $this->response->withCreated();
         } catch (Exception $ex) {

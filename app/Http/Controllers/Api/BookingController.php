@@ -9,6 +9,7 @@ use App\Services\BookingServiceInterface;
 use App\Services\UserServiceInterface;
 use App\Services\BookingDetailServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class BookingController extends ApiController
 {
@@ -64,14 +65,17 @@ class BookingController extends ApiController
     {
         try {
             $booking = null;
+            $emails = null;
             if (!$request->is_create_user) {
                 $booking = $this->bookingService->createBooking([
                     'total' => $request->total,
                     'status' => 0,
                     'user_id' => $request->user['id'],
                 ]);
+                $emails = $request->user['email'];
             } else {
                 $user = $this->userService->register($request->user);
+                $emails = $user->email;
                 $booking = $this->bookingService->createBooking([
                     'total' => $request->total,
                     'status' => 0,
@@ -80,7 +84,6 @@ class BookingController extends ApiController
             }
 
             foreach ($request->bookings as $item) {
-                $totalQty = 0;
                 $this->bookingDetailService->createBookingDetail([
                     'start_day' => $item['start_day'],
                     'end_day' => $item['end_day'],
@@ -90,12 +93,13 @@ class BookingController extends ApiController
                     'room_id' => $item['room_id'],
                     'hotel_id' => $item['hotel_id'],
                 ]);
-                $totalQty += $item['price'];
                 $room = DB::table("rooms")->where('id', $item['room_id'])->where('hotel_id', $item['hotel_id'])->first();
                 DB::table("rooms")->where('id', $item['room_id'])->where('hotel_id', $item['hotel_id'])->update([
-                    'qty' => $room->space - $totalQty
+                    'qty' => $room->space - $item['qty']
                 ]);
             }
+
+            Mail::to($emails)->send(new \App\Mail\BookingMail(['emails' => $emails]));
 
             return $this->response->withCreated();
         } catch (Exception $ex) {

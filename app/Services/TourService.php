@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 class TourService implements TourServiceInterface
 {
@@ -87,7 +88,8 @@ class TourService implements TourServiceInterface
         $mostView = $params['views'] ?? null;
         $detail = $params['detail'] ?? null;
         $now = now();
-        $lastDay = $now->addDay();
+        $tomorrow = Carbon::tomorrow();
+        $yesterday = Carbon::yesterday();
         $active = $params['active'] ?? null;
 
         if ($mostView == null) {
@@ -110,8 +112,9 @@ class TourService implements TourServiceInterface
                     });
                     break;
                 case 'last_hour':
-                    $query->whereHas('tourDepartures', function ($q) use ($lastDay) {
-                        $q->where('start_day', '<=', $lastDay);
+                    $query->whereHas('tourDepartures', function ($q) use ($tomorrow, $yesterday) {
+                        $q->whereDate('start_day', '>=', $yesterday)
+                            ->whereDate('start_day', '<=', $tomorrow);
                     });
                     break;
                 default:
