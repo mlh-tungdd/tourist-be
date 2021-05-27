@@ -124,4 +124,31 @@ class TourPriceService implements TourPriceServiceInterface
             return $item->getTourPriceResponseByTourId();
         });
     }
+
+    /**
+     * create
+     *
+     * @param array $params
+     * @return void
+     */
+    public function createTourPriceOption($params)
+    {
+        $this->tourPrice->create([
+            'tour_id' => $params['tour_id'],
+            'type_customer' => $params['type_customer'],
+            'original_price' => $params['original_price'],
+            'price' => $params['price'],
+        ]);
+    }
+
+    /**
+     * edit
+     *
+     * @param array $params
+     * @return void
+     */
+    public function updateTourPriceOption($params)
+    {
+        $this->tourPrice->findOrFail($params['id'])->update($params);
+    }
 }

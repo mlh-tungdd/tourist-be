@@ -17,4 +17,8 @@ interface TourPriceServiceInterface
     public function updateTourPrice($params);
 
     public function getListTourPriceByTourId($tourId);
+
+    public function createTourPriceOption($params);
+
+    public function updateTourPriceOption($params);
 }

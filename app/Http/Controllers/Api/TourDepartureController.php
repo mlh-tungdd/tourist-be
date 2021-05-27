@@ -119,4 +119,41 @@ class TourDepartureController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeOption(TourDepartureRequest $request)
+    {
+        try {
+            $this->tourDeparture->createTourDepartureOption($request->all());
+            return $this->response->withCreated();
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Models\Time  $time
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOption(TourDepartureRequest $request, $id)
+    {
+        try {
+            $this->tourDeparture->updateTourDepartureOption([
+                'id' => $id,
+                'tour_id' => $request->tour_id,
+                'start_day' => $request->start_day,
+            ]);
+            return $this->response->withMessage('Update successful');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
 }

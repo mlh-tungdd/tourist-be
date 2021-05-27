@@ -17,4 +17,8 @@ interface TourDepartureServiceInterface
     public function updateTourDeparture($params);
 
     public function getListTourDepartureByTourId($tourId);
+
+    public function createTourDepartureOption($params);
+
+    public function updateTourDepartureOption($params);
 }

@@ -17,4 +17,8 @@ interface TourScheduleServiceInterface
     public function updateTourSchedule($params);
 
     public function getListTourScheduleByTourId($tourId);
+
+    public function createTourScheduleOption($params);
+
+    public function updateTourScheduleOption($params);
 }

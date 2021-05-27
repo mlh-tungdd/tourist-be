@@ -119,4 +119,43 @@ class TourPriceController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeOption(TourPriceRequest $request)
+    {
+        try {
+            $this->tourPrice->createTourPriceOption($request->all());
+            return $this->response->withCreated();
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Models\Time  $time
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOption(TourPriceRequest $request, $id)
+    {
+        try {
+            $this->tourPrice->updateTourPriceOption([
+                'id' => $id,
+                'tour_id' => $request->tour_id,
+                'type_customer' => $request->type_customer,
+                'original_price' => $request->original_price,
+                'price' => $request->price,
+            ]);
+            return $this->response->withMessage('Update successful');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
 }

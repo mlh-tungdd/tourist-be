@@ -130,6 +130,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/tour_departures/delete/{id}', 'TourDepartureController@destroy');
         Route::get('/tour_departures/{id}', 'TourDepartureController@show');
         Route::post('/tour_departures/update', 'TourDepartureController@update');
+        Route::post('/tour_departures_option', 'TourDepartureController@storeOption');
+        Route::post('/tour_departures_option/{id}', 'TourDepartureController@updateOption');
 
         // tour price
         Route::get('/tour_prices', 'TourPriceController@index');
@@ -138,6 +140,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/tour_prices/delete/{id}', 'TourPriceController@destroy');
         Route::get('/tour_prices/{id}', 'TourPriceController@show');
         Route::post('/tour_prices/update', 'TourPriceController@update');
+        Route::post('/tour_prices_option', 'TourPriceController@storeOption');
+        Route::post('/tour_prices_option/{id}', 'TourPriceController@updateOption');
 
         // tour schedule
         Route::get('/tour_schedules', 'TourScheduleController@index');
@@ -146,6 +150,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/tour_schedules/delete/{id}', 'TourScheduleController@destroy');
         Route::get('/tour_schedules/{id}', 'TourScheduleController@show');
         Route::post('/tour_schedules/update', 'TourScheduleController@update');
+        Route::post('/tour_schedules_option', 'TourScheduleController@storeOption');
+        Route::post('/tour_schedules_option/{id}', 'TourScheduleController@updateOption');
 
         // tour image
         Route::get('/tour_images', 'TourImageController@index');

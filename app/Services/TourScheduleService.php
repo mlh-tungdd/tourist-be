@@ -124,4 +124,31 @@ class TourScheduleService implements TourScheduleServiceInterface
             return $item->getTourScheduleResponseByTourId();
         });
     }
+
+    /**
+     * create
+     *
+     * @param array $params
+     * @return void
+     */
+    public function createTourScheduleOption($params)
+    {
+        $this->tourSchedule->create([
+            'tour_id' => $params['tour_id'],
+            'title' => $params['title'],
+            'content' => $params['content'],
+            'day_number' => $params['day_number'],
+        ]);
+    }
+
+    /**
+     * edit
+     *
+     * @param array $params
+     * @return void
+     */
+    public function updateTourScheduleOption($params)
+    {
+        $this->tourSchedule->findOrFail($params['id'])->update($params);
+    }
 }

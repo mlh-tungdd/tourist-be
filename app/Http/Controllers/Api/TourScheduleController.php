@@ -119,4 +119,43 @@ class TourScheduleController extends ApiController
             return $this->response->errorWrongArgs($ex->getMessage());
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeOption(TourScheduleRequest $request)
+    {
+        try {
+            $this->tourSchedule->createTourScheduleOption($request->all());
+            return $this->response->withCreated();
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Models\Time  $time
+     * @return \Illuminate\Http\Response
+     */
+    public function updateOption(TourScheduleRequest $request, $id)
+    {
+        try {
+            $this->tourSchedule->updateTourScheduleOption([
+                'id' => $id,
+                'tour_id' => $request->tour_id,
+                'title' => $request->title,
+                'content' => $request->content,
+                'day_number' => $request->day_number,
+            ]);
+            return $this->response->withMessage('Update successful');
+        } catch (Exception $ex) {
+            return $this->response->errorWrongArgs($ex->getMessage());
+        }
+    }
 }

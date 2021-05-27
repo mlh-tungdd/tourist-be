@@ -120,4 +120,29 @@ class TourDepartureService implements TourDepartureServiceInterface
             return $item->getTourDepartureResponseByTourId();
         });
     }
+
+    /**
+     * create
+     *
+     * @param array $params
+     * @return void
+     */
+    public function createTourDepartureOption($params)
+    {
+        $this->tourDeparture->create([
+            'tour_id' => $params['tour_id'],
+            'start_day' => $params['start_day'],
+        ]);
+    }
+
+    /**
+     * edit
+     *
+     * @param array $params
+     * @return void
+     */
+    public function updateTourDepartureOption($params)
+    {
+        $this->tourDeparture->findOrFail($params['id'])->update($params);
+    }
 }
