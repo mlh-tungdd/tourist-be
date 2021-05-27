@@ -40,6 +40,19 @@ class RoomController extends ApiController
     }
 
     /**
+     * Display a all of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllRoomByHotelId($id)
+    {
+        $list = $this->roomService->getListRoom([
+            'id' => $id
+        ]);
+        return $this->response->withData($list);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

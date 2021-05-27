@@ -13,4 +13,6 @@ interface RoomServiceInterface
     public function showRoom($id);
 
     public function updateRoom($params);
+
+    public function getListRoom($hotelId);
 }

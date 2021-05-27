@@ -14,6 +14,26 @@ class RoomService implements RoomServiceInterface
     }
 
     /**
+     * get list
+     *
+     * @return void
+     */
+    public function getListRoom($hotelId)
+    {
+        $query = $this->room->where('hotel_id', $hotelId)->orderByDesc('created_at')->paginate();
+
+        return [
+            'data' => $query->map(function ($item) {
+                return $item->getRoomResponse();
+            }),
+            'per_page' => $query->perPage(),
+            'total' => $query->total(),
+            'current_page' => $query->currentPage(),
+            'last_page' => $query->lastPage(),
+        ];
+    }
+
+    /**
      * get all
      *
      * @return void
