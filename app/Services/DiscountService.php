@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Discount;
+use Carbon\Carbon;
 
 class DiscountService implements DiscountServiceInterface
 {
@@ -39,7 +40,8 @@ class DiscountService implements DiscountServiceInterface
      */
     public function getAllDiscount($params)
     {
-        $query = $this->discount->orderByDesc('created_at')->get();
+        $now = Carbon::now();
+        $query = $this->discount->whereDate('publish_at', '>=', $now)->whereDate('closed_at', '<=', $now)->orderByDesc('created_at')->get();
         return $query->map(function ($item) {
             return $item->getDiscountResponse();
         });
