@@ -52,7 +52,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/discounts', 'DiscountController@store');
     Route::get('/discounts/delete/{id}', 'DiscountController@destroy');
     Route::get('/discounts/{id}', 'DiscountController@show');
-    Route::patch('/discounts/{id}', 'DiscountController@update');
+    Route::post('/discounts/{id}', 'DiscountController@update');
 
     // room
     Route::get('/rooms/all_room/{id}', 'RoomController@all');

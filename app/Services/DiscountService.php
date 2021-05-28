@@ -41,7 +41,7 @@ class DiscountService implements DiscountServiceInterface
     public function getAllDiscount($params)
     {
         $now = Carbon::now();
-        $query = $this->discount->whereDate('publish_at', '>=', $now)->whereDate('closed_at', '<=', $now)->orderByDesc('created_at')->get();
+        $query = $this->discount->whereDate('publish_at', '<=', $now)->whereDate('closed_at', '>=', $now)->orderByDesc('created_at')->get();
         return $query->map(function ($item) {
             return $item->getDiscountResponse();
         });

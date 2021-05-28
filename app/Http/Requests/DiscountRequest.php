@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Http\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,8 +24,21 @@ class DiscountRequest extends BaseFormRequest
      */
     public function rules()
     {
+        $code = [
+            'required',
+            'max:255',
+            Request::Route('id') != null ? 'unique:discounts,code,' . Request::Route('id') : 'unique:discounts,code'
+        ];
         return [
-            'code' => 'required|max:255',
+            'discount' => 'required',
+            'code' => $code,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "code.unique" => "Code is exist",
         ];
     }
 }
