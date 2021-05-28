@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api'], function () {
+    Route::post('/auth/forget_password', 'UserController@forgetPassword');
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');

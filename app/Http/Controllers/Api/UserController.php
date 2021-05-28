@@ -9,6 +9,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
+use Mail;
+use Illuminate\Support\Str;
 
 class UserController extends ApiController
 {
@@ -95,6 +97,27 @@ class UserController extends ApiController
             }
         } else {
             return $this->response->errorUnauthorized('Sai mật khẩu');
+        }
+    }
+
+    public function forgetPassword(Request $request)
+    {
+        $email = $request->email;
+        $password = Str::random(10);
+        $detail = [
+            'title' => 'Mật khẩu mới của bạn là: ',
+            'body' => $password,
+        ];
+        try {
+            $this->userService->forgetPassword([
+                'email' => $email,
+                'password' => $password
+            ]);
+            Mail::to($email)->send(new \App\Mail\ForgetPassword($detail));
+
+            return $this->response->withMessage('Lấy lại mật khẩu thành công');
+        } catch (Exception $ex) {
+            return $this->response->errorForbidden();
         }
     }
 }

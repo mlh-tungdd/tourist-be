@@ -11,4 +11,6 @@ interface UserServiceInterface
     public function register($params);
 
     public function updateUserProfile($params);
+
+    public function forgetPassword($params);
 }

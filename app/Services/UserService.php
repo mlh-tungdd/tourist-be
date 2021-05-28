@@ -91,4 +91,13 @@ class UserService implements UserServiceInterface
     {
         $this->user->findOrFail($id)->delete();
     }
+
+    public function forgetPassword($params)
+    {
+        $user = $this->user->where('email', $params['email'])->first();
+        $this->user->findOrFail($user->id)->update([
+            'password' => Hash::make($params['password'])
+        ]);
+        return $user;
+    }
 }
