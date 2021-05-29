@@ -108,8 +108,12 @@ class OrderController extends ApiController
                     'space' => $tour->space - $totalQty
                 ]);
             }
+            $detail = [
+                'title' => "Đơn đặt tour $order->id của bạn đã được ghi nhận. Chúng tôi sẽ liên lạc với bạn sớm nhất có thể.",
+                'body' => 'Nếu chưa đăng ký tài khoản, vui lòng đăng ký để có trải nghiệm tốt nhất.',
+            ];
 
-            Mail::to($emails)->send(new \App\Mail\SendMail(['emails' => $emails]));
+            Mail::to($emails)->send(new \App\Mail\TouristMail($detail));
 
             return $this->response->withCreated();
         } catch (Exception $ex) {

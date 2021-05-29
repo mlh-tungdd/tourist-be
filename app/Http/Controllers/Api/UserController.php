@@ -113,7 +113,7 @@ class UserController extends ApiController
                 'email' => $email,
                 'password' => $password
             ]);
-            Mail::to($email)->send(new \App\Mail\ForgetPassword($detail));
+            Mail::to($email)->send(new \App\Mail\TouristMail($detail));
 
             return $this->response->withMessage('Lấy lại mật khẩu thành công');
         } catch (Exception $ex) {
