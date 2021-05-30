@@ -19,7 +19,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/auth/register', 'AuthController@register');
     Route::post('/auth/login', 'AuthController@login');
     Route::post('/auth/logout', 'AuthController@logout');
-    Route::get('/user/list', 'UserController@getList');
 
     // setting
     Route::get('/settings', 'SettingController@show');
@@ -101,7 +100,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
-
+        Route::get('/user/list', 'UserController@getList');
         Route::get('/user/delete/{id}', 'UserController@delete');
         Route::get('/user/info', 'UserController@showProfile');
 

@@ -23,7 +23,8 @@ class UserService implements UserServiceInterface
      */
     public function getList($params)
     {
-        $query = $this->user->where('id', '!=', JWTAuth::user()->id)->orderByDesc('created_at');
+        // $query = $this->user->where('id', '!=', JWTAuth::user()->id)->orderByDesc('created_at');
+        $query = $this->user->orderByDesc('created_at');
         $username = $params['username'] ?? null;
         $fullname = $params['fullname'] ?? null;
         $email = $params['email'] ?? null;
