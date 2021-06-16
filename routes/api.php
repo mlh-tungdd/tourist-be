@@ -98,6 +98,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/partners', 'PartnerController@index');
     Route::get('/partners/all_partner', 'PartnerController@all');
+    Route::get('/times', 'TimeController@index');
 
     Route::group(['middleware' => 'jwt.auth',], function () {
         // user
@@ -105,7 +106,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/user/info', 'UserController@showProfile');
 
         // time
-        Route::get('/times', 'TimeController@index');
+
         Route::get('/times/all_time', 'TimeController@all');
         Route::post('/times', 'TimeController@store');
         Route::get('/times/delete/{id}', 'TimeController@destroy');

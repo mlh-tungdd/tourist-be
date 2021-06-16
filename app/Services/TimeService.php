@@ -30,13 +30,14 @@ class TimeService implements TimeServiceInterface
         $query = $query->paginate();
 
         return [
-            'data' => $query->map(function ($item) {
-                return $item->getTimeResponse();
-            }),
-            'per_page' => $query->perPage(),
-            'total' => $query->total(),
-            'current_page' => $query->currentPage(),
-            'last_page' => $query->lastPage(),
+            'data' => [
+                'fanclub_member_ng_users' => [
+                    'list' => $query->map(function ($item) {
+                        return $item->getTimeResponse();
+                    }),
+                    'total' => $query->total()
+                ]
+            ],
         ];
     }
 

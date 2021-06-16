@@ -30,7 +30,14 @@ class Time extends Model
     {
         return [
             'id' => $this->id,
+            'ngFanclubMember' => [
+                'fanclubMember' => [
+                    'fanclubMemberCode' => $this->title,
+                    'id' => $this->id
+                ]
+            ],
             'title' => $this->title,
+            'updatedAt' => $this->createdAt
         ];
     }
 }
